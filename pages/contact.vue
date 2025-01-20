@@ -2,9 +2,9 @@
 <template>
     <div>
       <!-- En-tête de page -->
-      <div class="bg-gray-900 py-12">
+      <div class="bg-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 class="text-4xl font-bold text-white">Contact</h1>
+          <h1 class="text-4xl font-bold text-orange-500">Contact</h1>
         </div>
       </div>
   
@@ -21,11 +21,11 @@
               </div>
               <div>
                 <h3 class="font-semibold text-lg">Téléphone</h3>
-                <p class="text-gray-600">Votre numéro ici</p>
+                <p class="text-gray-600">04 72 87 00 80</p>
               </div>
               <div>
                 <h3 class="font-semibold text-lg">Email</h3>
-                <p class="text-gray-600">contact@toituremk.com</p>
+                <p class="text-gray-600">mk.construct2020@gmail.com</p>
               </div>
             </div>
           </div>

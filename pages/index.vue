@@ -6,7 +6,7 @@
             <!-- Image de fond avec overlay -->
             <div class="absolute inset-0">
                 <!-- Remplacer par votre propre image -->
-                <img src="/assets/images/hero.jpg" alt="Toiture" class="w-full h-full object-cover" />
+                <img src="/assets/images/hero.jpg" alt="hero-toiture-image" class="w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black bg-opacity-40"></div>
             </div>
 
@@ -14,7 +14,7 @@
             <div
                 class="relative z-10 max-w-7xl mx-auto h-full flex flex-col justify-center px-4 sm:px-6 lg:px-8 text-white">
                 <h1 class="text-5xl font-bold mb-4" style="color: #F26835;">
-                    Bienvenue chez Toiture MK
+                    Bienvenue chez Toiture Mk
                 </h1>
                 <p class="text-xl md:text-2xl text-white">
                     Votre partenaire de confiance pour tous vos besoins en toiture
@@ -43,8 +43,8 @@
                     </div>
                     <!-- Remplacer par vos propres images -->
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gray-200 rounded-lg h-48"></div>
-                        <div class="bg-gray-200 rounded-lg h-48"></div>
+                        <img src="/assets/images/a-propos1.jpg" alt="toiture-image-apropos1" class="rounded-lg h-48 object-cover">
+                        <img src="/assets/images/a-propos2.jpg" alt="toiture-image-apropos2" class="rounded-lg h-48 object-cover">
                     </div>
                 </div>
             </div>
@@ -147,23 +147,5 @@
                 </div>
             </div>
         </section>
-
-
-        <!-- Footer -->
-        <footer class="bg-black text-white py-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4" style="color: #F26835;">Toiture MK</h3>
-                        <p>Votre expert en toiture de confiance</p>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-4" style="color: #F26835;">Contact</h3>
-                        <p>Email: contact@toituremk.com</p>
-                        <p>Téléphone: XX XX XX XX XX</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
 </template>
