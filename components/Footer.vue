@@ -14,7 +14,8 @@
         <!-- Coordonnées -->
         <div
           class="w-full sm:w-auto text-center sm:text-left mt-4 sm:mt-0 text-sm text-gray-300 backdrop-blur-md bg-white/10 p-4 rounded-lg shadow-md">
-          <p>📍 Excelsiorlaan 71, 1930 Zaventem</p>
+          <p>📍 <a href="https://www.google.com/maps?q=Excelsiorlaan+71,+1930+Zaventem" 
+                  target="_blank" class="hover:text-orange-500 transition-all duration-300">Excelsiorlaan 71, 1930 Zaventem</a></p>
           <p>📞 <a href="tel:+32472870080" class="hover:text-orange-500 transition-all duration-300">0472 87 00 80</a>
           </p>
           <p>✉️ <a href="mailto:mk.construct2020@gmail.com"

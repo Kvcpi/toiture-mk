@@ -16,7 +16,15 @@
           <div class="space-y-4">
             <div>
               <h3 class="font-semibold text-lg">Adresse</h3>
-              <p>📍 Excelsiorlaan 71, 1930 Zaventem</p>
+              <!-- Lien Google Maps -->
+              <p>
+                📍 
+                <a href="https://www.google.com/maps?q=Excelsiorlaan+71,+1930+Zaventem" 
+                  target="_blank" 
+                  class="hover:text-orange-500 transition-all duration-300">
+                  Excelsiorlaan 71, 1930 Zaventem
+                </a>
+              </p>
             </div>
             <div>
               <h3 class="font-semibold text-lg">Téléphone</h3>
@@ -24,8 +32,7 @@
             </div>
             <div>
               <h3 class="font-semibold text-lg">Email</h3>
-              <p>✉️ <a href="mailto:mk.construct2020@gmail.com"
-                class="hover:text-orange-500 transition-all duration-300">mk.construct2020@gmail.com</a></p>
+              <p>✉️ <a href="mailto:mk.construct2020@gmail.com" class="hover:text-orange-500 transition-all duration-300">mk.construct2020@gmail.com</a></p>
             </div>
           </div>
         </div>

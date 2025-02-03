@@ -1,77 +1,146 @@
 <template>
   <div>
-    <!-- En-tête de page -->
-    <div class="bg-white py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-bold text-orange-500 text-center">Nos Réalisations</h1>
+    <!-- Fenêtre contextuelle -->
+    <div v-if="showPopup" class="popup fixed inset-0 bg-gray-700 bg-opacity-50 flex items-center justify-center z-30">
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <p class="text-gray-700">Déplacez le curseur sur l'image pour découvrir l'effet avant/après !</p>
+        <button @click="closePopup" class="mt-4 bg-orange-500 text-white px-4 py-2 rounded">Compris</button>
       </div>
     </div>
 
-    <!-- Galerie photos -->
+    <!-- Contenu principal -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Image 1 -->
+        <!-- Projet 1 - Avant / Après -->
         <div class="group relative">
-          <img 
-            src="/assets/images/construction.webp" 
-            alt="Description du projet 1" 
-            class="w-full h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
-          />
-          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity duration-300 rounded-lg flex items-center justify-center">
-            <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-xl font-bold">Projet 1</h3>
-              <p>Description du projet 1</p>
-            </div>
+          <div class="before-after-container" 
+               @mousemove="moveCursor" 
+               @mouseenter="showCursor" 
+               @mouseleave="hideCursor"
+               @touchstart="startTouch" 
+               @touchmove="moveTouch" 
+               @touchend="endTouch">
+            <img src="/assets/images/avant-toiture.jpg" alt="Avant le projet" class="before-img" />
+            <img src="/assets/images/apres-toiture.jpg" alt="Après le projet" class="after-img" />
+          </div>
+          <div class="text-center mt-2">
+            <h3 class="text-xl font-bold">Projet 1</h3>
+            <p>Description du projet 1</p>
           </div>
         </div>
-
-        <!-- Image 2 -->
-        <div class="group relative">
-          <img 
-            src="/assets/images/construction.webp" 
-            alt="Description du projet 2" 
-            class="w-full h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
-          />
-          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity duration-300 rounded-lg flex items-center justify-center">
-            <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-xl font-bold">Projet 2</h3>
-              <p>Description du projet 2</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Image 3 -->
-        <div class="group relative">
-          <img 
-            src="/assets/images/construction.webp" 
-            alt="Description du projet 3" 
-            class="w-full h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
-          />
-          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity duration-300 rounded-lg flex items-center justify-center">
-            <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-xl font-bold">Projet 3</h3>
-              <p>Description du projet 3</p>
-            </div>
-          </div>
-        </div>
-        <div class="text-center mt-12">
-            <a href="https://www.facebook.com/people/LS-Construct-Klid/100077387097074/?_rdr" target="_blank" class="inline-block bg-orange-500 text-white py-3 px-8 rounded-md hover:bg-orange-600 transition-all duration-300">
-                Voir nos travaux sur Facebook <i class="fab fa-facebook-f ml-2"></i>
-            </a>
-        </div>
-        <!-- Ajoute plus de blocs ici pour chaque image -->
       </div>
     </div>
   </div>
 </template>
 
+<script setup>
+import { ref } from 'vue'
+
+const showPopup = ref(true)
+const sliderPosition = ref(50)  // Position du curseur ou du doigt
+const isCursorVisible = ref(false)
+
+function closePopup() {
+  showPopup.value = false
+}
+
+function moveCursor(event) {
+  if (!isCursorVisible.value) return
+  const container = event.target.closest('.before-after-container')
+  const mouseX = event.clientX
+  const containerWidth = container.offsetWidth
+  sliderPosition.value = (mouseX / containerWidth) * 100
+}
+
+function showCursor() {
+  isCursorVisible.value = true
+}
+
+function hideCursor() {
+  isCursorVisible.value = false
+}
+
+let startTouchPos = 0
+function startTouch(event) {
+  startTouchPos = event.touches[0].clientX
+}
+
+function moveTouch(event) {
+  const touchPos = event.touches[0].clientX
+  const container = event.target.closest('.before-after-container')
+  const containerWidth = container.offsetWidth
+  const diff = touchPos - startTouchPos
+  sliderPosition.value = ((startTouchPos + diff) / containerWidth) * 100
+}
+
+function endTouch() {
+  startTouchPos = 0
+}
+</script>
+
 <style scoped>
-/* Améliorations de la mise en page */
-.group:hover .text-white {
+.popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup .bg-white {
+  width: 80%;
+  max-width: 400px;
+}
+
+.before-after-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.before-img,
+.after-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.after-img {
+  opacity: 0;
+}
+
+.before-after-container:hover .after-img,
+.before-after-container:active .after-img {
   opacity: 1;
 }
 
-.group:hover .transition-transform {
-  transform: scale(1.05);
+.after-img {
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.before-after-container:hover .after-img {
+  width: 100%;
+}
+
+.before-after-container {
+  position: relative;
+}
+
+.before-after-container {
+  cursor: pointer; /* Pour les desktop */
+}
+
+@media (max-width: 768px) {
+  .before-after-container {
+    height: 300px;
+  }
+  .before-img,
+  .after-img {
+    transition: none; /* Pas de transition sur mobile */
+  }
 }
 </style>
