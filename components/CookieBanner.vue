@@ -20,20 +20,20 @@ export default {
     };
   },
   mounted() {
-    // S'assurer que localStorage est utilisé uniquement côté client
-    if (process.client) {
+    // Vérifie si on est côté client
+    if (typeof window !== 'undefined') {
       this.accepted = localStorage.getItem('cookiesAccepted') === 'true';
     }
   },
   methods: {
     acceptCookies() {
-      if (process.client) {
+      if (typeof window !== 'undefined') {
         localStorage.setItem('cookiesAccepted', 'true');
       }
       this.accepted = true;
     },
     rejectCookies() {
-      if (process.client) {
+      if (typeof window !== 'undefined') {
         localStorage.setItem('cookiesAccepted', 'false');
       }
       this.accepted = true;
