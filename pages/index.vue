@@ -4,7 +4,7 @@
         <header class="relative h-screen">
             <!-- Image de fond avec overlay -->
             <div class="absolute inset-0">
-                <img src="/assets/images/hero.jpg" alt="hero-toiture-image"
+                <img src="/assets/images/hero.webp" alt="hero-toiture-image"
                     class="w-full h-full object-cover opacity-70" />
                 <div class="absolute inset-0 bg-black bg-opacity-40"></div>
             </div>
@@ -19,6 +19,12 @@
                 <p class="text-xl md:text-2xl text-white font-light">
                     Votre partenaire de confiance pour tous vos besoins en toiture
                 </p>
+                <div class="mt-12">
+                    <a href="/contact"
+                        class="inline-block bg-orange-500 text-white py-3 px-8 rounded-md hover:bg-orange-600 transition-all duration-300">
+                        Contactez-nous pour un devis gratuit
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -62,12 +68,12 @@
                     <div class="relative flex justify-center items-center space-x-4">
                         <div
                             class="w-1/2 overflow-hidden rounded-lg transform hover:scale-105 transition-transform duration-300">
-                            <img src="/assets/images/a-propos1.jpg" alt="toiture-image-apropos1"
+                            <img src="/assets/images/a-propos1.webp" alt="toiture-image-apropos1"
                                 class="object-cover w-full h-full">
                         </div>
                         <div
                             class="w-1/2 overflow-hidden rounded-lg transform hover:scale-105 transition-transform duration-300">
-                            <img src="/assets/images/a-propos2.jpg" alt="toiture-image-apropos2"
+                            <img src="/assets/images/a-propos2.webp" alt="toiture-image-apropos2"
                                 class="object-cover w-full h-full">
                         </div>
                     </div>
@@ -77,61 +83,91 @@
 
         <!-- Section Nos Services -->
         <section class="bg-black text-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-orange-500 text-center mb-12">Nos services</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            <!-- Service 1 -->
-            <div class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
-                <div class="relative group">
-                    <img src="/assets/images/renovation.jpg" alt="Rénovation" class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-orange-500 text-center mb-12">Nos services</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Service 1 -->
+                    <div
+                        class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
+                        <div class="relative group">
+                            <img src="/assets/images/renovation.webp" alt="Rénovation"
+                                class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
+                            <div
+                                class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-orange-500 mb-2 group-hover:text-white transition-colors duration-300">
+                            Rénovation</h3>
+                        <p class="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
+                            Notre service de rénovation de toiture est conçu pour redonner vie à votre toit
+                            vieillissant. Que ce soit pour réparer des fuites, remplacer des tuiles endommagées ou
+                            rénover l'ensemble de la structure.
+                        </p>
+                    </div>
+                    <!-- Service 2 -->
+                    <div
+                        class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
+                        <div class="relative group">
+                            <img src="/assets/images/construction.webp" alt="Construction"
+                                class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
+                            <div
+                                class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-orange-500 mb-2 group-hover:text-white transition-colors duration-300">
+                            Construction</h3>
+                        <p class="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
+                            Nous proposons des services de construction de toiture adaptés à tous types de projets,
+                            qu’il s’agisse de maisons individuelles, d’immeubles ou d'extensions.
+                        </p>
+                    </div>
+                    <!-- Service 3 -->
+                    <div
+                        class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
+                        <div class="relative group">
+                            <img src="/assets/images/menuiserie.webp" alt="Menuiserie"
+                                class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
+                            <div
+                                class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-orange-500 mb-2 group-hover:text-white transition-colors duration-300">
+                            Menuiserie</h3>
+                        <p class="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
+                            Notre service de menuiserie se concentre sur l'ajout de structures en bois personnalisées à
+                            votre toiture, comme des lucarnes ou bardages.
+                        </p>
+                    </div>
+                    <!-- Service 4 -->
+                    <div
+                        class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
+                        <div class="relative group">
+                            <img src="/assets/images/isolation.webp" alt="Isolation"
+                                class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
+                            <div
+                                class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-orange-500 mb-2 group-hover:text-white transition-colors duration-300">
+                            Isolation</h3>
+                        <p class="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
+                            L'isolation de votre toiture est essentielle pour améliorer l'efficacité énergétique de
+                            votre maison tout en réduisant les coûts.
+                        </p>
+                    </div>
                 </div>
-                <h3 class="text-xl font-bold text-orange-500 mb-2 group-hover:text-white transition-colors duration-300">Rénovation</h3>
-                <p class="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
-                    Notre service de rénovation de toiture est conçu pour redonner vie à votre toit vieillissant. Que ce soit pour réparer des fuites, remplacer des tuiles endommagées ou rénover l'ensemble de la structure.
-                </p>
-            </div>
-            <!-- Service 2 -->
-            <div class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
-                <div class="relative group">
-                    <img src="/assets/images/construction.jpg" alt="Construction" class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md"></div>
+                <div class="text-center mt-12">
+                    <a href="/contact"
+                        class="inline-block bg-orange-500 text-white py-3 px-8 rounded-md hover:bg-orange-600 transition-all duration-300">
+                        Contactez-nous pour un devis gratuit
+                    </a>
                 </div>
-                <h3 class="text-xl font-bold text-orange-500 mb-2 group-hover:text-white transition-colors duration-300">Construction</h3>
-                <p class="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
-                    Nous proposons des services de construction de toiture adaptés à tous types de projets, qu’il s’agisse de maisons individuelles, d’immeubles ou d'extensions.
-                </p>
             </div>
-            <!-- Service 3 -->
-            <div class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
-                <div class="relative group">
-                    <img src="/assets/images/menuiserie.jpg" alt="Menuiserie" class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md"></div>
-                </div>
-                <h3 class="text-xl font-bold text-orange-500 mb-2 group-hover:text-white transition-colors duration-300">Menuiserie</h3>
-                <p class="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
-                    Notre service de menuiserie se concentre sur l'ajout de structures en bois personnalisées à votre toiture, comme des lucarnes ou bardages.
-                </p>
-            </div>
-            <!-- Service 4 -->
-            <div class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
-                <div class="relative group">
-                    <img src="/assets/images/isolation.jpg" alt="Isolation" class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md"></div>
-                </div>
-                <h3 class="text-xl font-bold text-orange-500 mb-2 group-hover:text-white transition-colors duration-300">Isolation</h3>
-                <p class="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
-                    L'isolation de votre toiture est essentielle pour améliorer l'efficacité énergétique de votre maison tout en réduisant les coûts.
-                </p>
-            </div>
-        </div>
-        <div class="text-center mt-12">
-            <a href="/contact" class="inline-block bg-orange-500 text-white py-3 px-8 rounded-md hover:bg-orange-600 transition-all duration-300">
-                Contactez-nous pour un devis gratuit
-            </a>
-        </div>
-    </div>
-</section>
+        </section>
 
     </div>
 </template>

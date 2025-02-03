@@ -4,6 +4,7 @@
     <NuxtPage />
     <BackToTop />
     <Footer />
+    <CookieBanner />
   </div>
 </template>
 
@@ -29,16 +30,22 @@
   transform-style: preserve-3d;
   will-change: transform, opacity;
 }
+
 </style>
 
 <script>
 import BackToTop from './components/BackToTop.vue';
+import CookieBanner from './components/CookieBanner.vue';
 
 export default {
   components: {
     BackToTop,
+    Footer,
+    CookieBanner,
   },
 };
 
 import Footer from './components/Footer.vue'
+
+
 </script>

@@ -13,7 +13,7 @@
         <!-- Image 1 -->
         <div class="group relative">
           <img 
-            src="/assets/images/construction.jpg" 
+            src="/assets/images/construction.webp" 
             alt="Description du projet 1" 
             class="w-full h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
           />
@@ -28,7 +28,7 @@
         <!-- Image 2 -->
         <div class="group relative">
           <img 
-            src="/assets/images/construction.jpg" 
+            src="/assets/images/construction.webp" 
             alt="Description du projet 2" 
             class="w-full h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
           />
@@ -43,7 +43,7 @@
         <!-- Image 3 -->
         <div class="group relative">
           <img 
-            src="/assets/images/construction.jpg" 
+            src="/assets/images/construction.webp" 
             alt="Description du projet 3" 
             class="w-full h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
           />
@@ -54,7 +54,11 @@
             </div>
           </div>
         </div>
-
+        <div class="text-center mt-12">
+            <a href="https://www.facebook.com/people/LS-Construct-Klid/100077387097074/?_rdr" target="_blank" class="inline-block bg-orange-500 text-white py-3 px-8 rounded-md hover:bg-orange-600 transition-all duration-300">
+                Voir nos travaux sur Facebook <i class="fab fa-facebook-f ml-2"></i>
+            </a>
+        </div>
         <!-- Ajoute plus de blocs ici pour chaque image -->
       </div>
     </div>
