@@ -88,6 +88,9 @@ const projects = ref([
 
 onMounted(() => {
   checkDevice()
+  if (localStorage.getItem("popupSeen") === "true") {
+    showPopup.value = false
+  }
   window.addEventListener('resize', checkDevice)
 })
 
@@ -97,6 +100,7 @@ function checkDevice() {
 
 function closePopup() {
   showPopup.value = false
+  localStorage.setItem("popupSeen", "true") // Enregistre que l'utilisateur a fermé le popup
 }
 
 function toggleImage(index) {
