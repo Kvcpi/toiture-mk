@@ -5,7 +5,7 @@
         <!-- Logo -->
         <div class="flex-shrink-0">
           <NuxtLink to="/">
-            <img src="assets/images/logo2.png" alt="logo-toituremk" class="w-40 h-auto brightness-150" />
+            <img src="/images/logo2.png" alt="logo-toituremk" class="w-40 h-auto brightness-150" />
           </NuxtLink>
         </div>
 

@@ -4,7 +4,7 @@
         <header class="relative h-screen">
             <!-- Image de fond avec overlay -->
             <div class="absolute inset-0">
-                <img src="/assets/images/hero.webp" alt="hero-toiture-image"
+                <img src="/images/hero.webp" alt="hero-toiture-image"
                     class="w-full h-full object-cover opacity-70" />
                 <div class="absolute inset-0 bg-black bg-opacity-40"></div>
             </div>
@@ -68,12 +68,12 @@
                     <div class="relative flex justify-center items-center space-x-4">
                         <div
                             class="w-1/2 overflow-hidden rounded-lg transform hover:scale-105 transition-transform duration-300">
-                            <img src="/assets/images/a-propos1.webp" alt="toiture-image-apropos1"
+                            <img src="/images/a-propos1.webp" alt="toiture-image-apropos1"
                                 class="object-cover w-full h-full">
                         </div>
                         <div
                             class="w-1/2 overflow-hidden rounded-lg transform hover:scale-105 transition-transform duration-300">
-                            <img src="/assets/images/a-propos2.webp" alt="toiture-image-apropos2"
+                            <img src="/images/a-propos2.webp" alt="toiture-image-apropos2"
                                 class="object-cover w-full h-full">
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                     <div
                         class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
                         <div class="relative group">
-                            <img src="/assets/images/renovation.webp" alt="Rénovation"
+                            <img src="/images/renovation.webp" alt="Rénovation"
                                 class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
                             <div
                                 class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
@@ -109,7 +109,7 @@
                     <div
                         class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
                         <div class="relative group">
-                            <img src="/assets/images/construction.webp" alt="Construction"
+                            <img src="/images/construction.webp" alt="Construction"
                                 class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
                             <div
                                 class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
@@ -127,7 +127,7 @@
                     <div
                         class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
                         <div class="relative group">
-                            <img src="/assets/images/menuiserie.webp" alt="Menuiserie"
+                            <img src="/images/menuiserie.webp" alt="Menuiserie"
                                 class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
                             <div
                                 class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
@@ -145,7 +145,7 @@
                     <div
                         class="bg-black p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
                         <div class="relative group">
-                            <img src="/assets/images/isolation.webp" alt="Isolation"
+                            <img src="/images/isolation.webp" alt="Isolation"
                                 class="rounded-md mb-4 transform group-hover:scale-105 transition-transform duration-300">
                             <div
                                 class="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">

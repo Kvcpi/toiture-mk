@@ -9,7 +9,7 @@
       <div class="flex flex-wrap justify-between items-center">
         <!-- Logo -->
         <div class="flex-shrink-0 w-full sm:w-auto text-center sm:text-left">
-          <img src="assets/images/logo2.png" alt="logo-toituremk" class="w-40 h-auto brightness-150 mx-auto sm:mx-0" />
+          <img src="/images/logo2.png" alt="logo-toituremk" class="w-40 h-auto brightness-150 mx-auto sm:mx-0" />
         </div>
         <!-- Coordonnées -->
         <div
