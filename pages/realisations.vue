@@ -69,18 +69,18 @@ const projects = ref([
     isHovered: false
   },
   {
-    title: "Ravalement de façade",
-    description: "Peinture et enduit sur 150m²",
-    before: "/images/construction.webp",
-    after: "/images/isolation.webp",
+    title: "Rénovation de toiture",
+    description: "+ panneaux solaires à l'arrière",
+    before: "/images/avant-toiture2.jpg",
+    after: "/images/apres-toiture2.jpg",
     showAfterImage: false,
     isHovered: false
   },
   {
-    title: "Aménagement extérieur",
+    title: "Rénovation de terrasse",
     description: "Création d'une terrasse en bois",
-    before: "/images/menuiserie.webp",
-    after: "/images/renovation.webp",
+    before: "/images/avant-terrasse.jpg",
+    after: "/images/apres-terrasse.jpg",
     showAfterImage: false,
     isHovered: false
   }

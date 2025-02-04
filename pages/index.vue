@@ -4,8 +4,7 @@
         <header class="relative h-screen">
             <!-- Image de fond avec overlay -->
             <div class="absolute inset-0">
-                <img src="/images/hero.webp" alt="hero-toiture-image"
-                    class="w-full h-full object-cover opacity-70" />
+                <img src="/images/hero.webp" alt="hero-toiture-image" class="w-full h-full object-cover opacity-70" />
                 <div class="absolute inset-0 bg-black bg-opacity-40"></div>
             </div>
 
@@ -39,7 +38,7 @@
                         <p class="leading-relaxed" style="color: #666;">
                             Que vous ayez besoin de réparations, de rénovations ou de nouvelles installations,
                             notre équipe dévouée est là pour vous offrir des solutions fiables et durables.
-                            Chez MK Toiture, nous combinons expertise technique, matériaux de qualité
+                            Chez Toiture Mk, nous combinons expertise technique, matériaux de qualité
                             supérieure et un service client exceptionnel pour garantir votre entière satisfaction.
                         </p>
                         <p class="leading-relaxed" style="color: #666;">
@@ -61,18 +60,18 @@
                             chaque situation,
                             et des solutions adaptées qui vous offriront tranquillité d'esprit et confort pendant de
                             nombreuses années.
-                            Faites confiance à MK Toiture pour un service sur mesure et de qualité.
+                            Faites confiance à Toiture Mk pour un service sur mesure et de qualité.
                         </p>
                     </div>
                     <!-- Nouveau style pour les images -->
                     <div class="relative flex justify-center items-center space-x-4">
                         <div
-                            class="w-1/2 overflow-hidden rounded-lg transform hover:scale-105 transition-transform duration-300">
+                            class="w-1/2 overflow-hidden transform rotate-[-10deg] hover:scale-105 transition-transform duration-300 border-4 border-white">
                             <img src="/images/a-propos1.webp" alt="toiture-image-apropos1"
                                 class="object-cover w-full h-full">
                         </div>
                         <div
-                            class="w-1/2 overflow-hidden rounded-lg transform hover:scale-105 transition-transform duration-300">
+                            class="w-1/2 overflow-hidden transform rotate-[10deg] hover:scale-105 transition-transform duration-300 border-4 border-white">
                             <img src="/images/a-propos2.webp" alt="toiture-image-apropos2"
                                 class="object-cover w-full h-full">
                         </div>
@@ -168,6 +167,5 @@
                 </div>
             </div>
         </section>
-
     </div>
 </template>
