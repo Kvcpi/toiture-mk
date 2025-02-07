@@ -13,7 +13,7 @@
         <div class="flex md:hidden">
           <button @click="toggleMobileMenu"
             class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-orange-500 transition-all duration-300">
-            <i :class="menuIcon"></i>
+            <i class="fa-solid fa-trowel-bricks"></i> <!-- Icône d'ouverture seule -->
           </button>
         </div>
 
@@ -42,7 +42,7 @@
         <div class="hidden md:block">
           <div class="flex items-center space-x-4">
             <a href="tel:+32472870080" class="text-sm hover:text-orange-500 transition-all duration-300">
-              📞 0472 87 00 80
+              <i class="fa-solid fa-phone"></i> 0472 87 00 80
             </a>
             <a href="https://www.facebook.com/people/LS-Construct-Klid/100077387097074/?_rdr" target="_blank"
               class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-orange-500 transition-all duration-300">
@@ -59,23 +59,23 @@
       <div class="px-4 pt-2 pb-4 space-y-3">
         <NuxtLink to="/"
           class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white transition-all duration-300"
-          active-class="bg-orange-500 text-white">
+          active-class="bg-orange-500 text-white" @click="closeMobileMenu">
           Accueil
         </NuxtLink>
         <NuxtLink to="/realisations"
           class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white transition-all duration-300"
-          active-class="bg-orange-500 text-white">
+          active-class="bg-orange-500 text-white" @click="closeMobileMenu">
           Réalisations
         </NuxtLink>
         <NuxtLink to="/contact"
           class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white transition-all duration-300"
-          active-class="bg-orange-500 text-white">
+          active-class="bg-orange-500 text-white" @click="closeMobileMenu">
           Contact
         </NuxtLink>
         <!-- Contact info dans le menu mobile -->
         <div class="pt-4 border-t border-gray-700">
           <a href="tel:+32472870080" class="block px-3 py-2 text-sm hover:text-orange-500 transition-all duration-300">
-            📞 0472 87 00 80
+            <i class="fa-solid fa-phone"></i> 0472 87 00 80
           </a>
           <a href="https://www.facebook.com/people/LS-Construct-Klid/100077387097074/?_rdr" target="_blank"
             class="block px-3 py-2 text-sm hover:text-orange-500 transition-all duration-300">
@@ -95,13 +95,14 @@ export default {
   data() {
     return {
       mobileMenuOpen: false,
-      menuIcon: 'fa-solid fa-trowel-bricks', // Icône pour l'ouverture
     };
   },
   methods: {
     toggleMobileMenu() {
       this.mobileMenuOpen = !this.mobileMenuOpen;
-      this.menuIcon = this.mobileMenuOpen ? 'fa-solid fa-trowel' : 'fa-solid fa-trowel-bricks';
+    },
+    closeMobileMenu() {
+      this.mobileMenuOpen = false;
     }
   }
 }

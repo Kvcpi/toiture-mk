@@ -3,7 +3,7 @@
       <div class="max-w-4xl mx-auto px-6 bg-white rounded-lg shadow-lg p-8">
         <h1 class="text-3xl font-bold mb-6 text-gray-900">Politique de Confidentialité</h1>
         <p class="mb-4">
-          Chez <strong>Toiture MK</strong>, nous respectons votre vie privée et nous nous engageons à protéger les données personnelles que vous partagez avec nous. Cette politique de confidentialité décrit comment nous collectons, utilisons et protégeons vos informations.
+          Chez <strong>Toiture Mk</strong>, nous respectons votre vie privée et nous nous engageons à protéger les données personnelles que vous partagez avec nous. Cette politique de confidentialité décrit comment nous collectons, utilisons et protégeons vos informations.
         </p>
   
         <h2 class="text-xl font-semibold mt-6 mb-2 text-gray-800">1. Informations que nous collectons</h2>
@@ -55,10 +55,10 @@
           Si vous avez des questions concernant cette politique de confidentialité, vous pouvez nous contacter à :
         </p>
         <p class="text-gray-600">
-          ✉️ <a href="mailto:mk.construct2020@gmail.com" class="text-orange-500 hover:underline">mk.construct2020@gmail.com</a>
+          <i class="fa-regular fa-paper-plane"></i> <a href="mailto:mk.construct2020@gmail.com" class="text-orange-500 hover:underline">mk.construct2020@gmail.com</a>
         </p>
         <p class="text-gray-600">
-          📞 <a href="tel:+32472870080" class="text-orange-500 hover:underline">0472 87 00 80</a>
+          <i class="fa-solid fa-phone"></i> <a href="tel:+32472870080" class="text-orange-500 hover:underline">0472 87 00 80</a>
         </p>
       </div>
     </div>
