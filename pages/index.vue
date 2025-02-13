@@ -11,7 +11,7 @@
                 class="relative z-10 max-w-7xl mx-auto text-white px-4 sm:px-6 lg:px-8 py-12 flex flex-col justify-center items-center text-center">
                 <h1
                     class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-orange-500 tracking-wide transform transition-transform duration-500 hover:scale-105">
-                    Bienvenue chez Toiture Mk
+                    Bienvenue chez Toiture Mk - Mk Construct
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl text-white font-light mb-6">
                     Votre partenaire de confiance pour tous vos besoins en toiture
@@ -112,24 +112,8 @@
                             </div>
                         </div>
 
-                        <!-- Service 3 Mobile -->
-                        <div class="snap-center flex-none w-[85vw] sm:w-[45vw]">
-                            <div
-                                class="bg-gray-900 rounded-xl p-4 h-full transform transition-all duration-300 hover:scale-105">
-                                <div class="aspect-video w-full mb-4 overflow-hidden rounded-lg">
-                                    <img src="/images/menuiserie.webp" alt="Menuiserie"
-                                        class="w-full h-full object-cover">
-                                </div>
-                                <h3 class="text-xl font-bold text-orange-500 mb-2">Menuiserie</h3>
-                                <p class="text-gray-300 text-sm sm:text-base">
-                                    Création et pose de charpentes traditionnelles et industrielles. Fabrication
-                                    d'éléments sur-mesure : chevrons, poutres, débords de toit décoratifs. Traitement
-                                    préventif et curatif du bois inclus. Design personnalisé selon vos goûts.
-                                </p>
-                            </div>
-                        </div>
 
-                        <!-- Service 4 Mobile -->
+                        <!-- Service 3 Mobile -->
                         <div class="snap-center flex-none w-[85vw] sm:w-[45vw]">
                             <div
                                 class="bg-gray-900 rounded-xl p-4 h-full transform transition-all duration-300 hover:scale-105">
@@ -148,7 +132,7 @@
                     </div>
 
                     <!-- Version desktop avec grid -->
-                    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Service 1 Desktop -->
                         <div class="group">
                             <div
@@ -185,25 +169,8 @@
                             </div>
                         </div>
 
-                        <!-- Service 3 Desktop -->
-                        <div class="group">
-                            <div
-                                class="bg-gray-900 rounded-xl p-4 h-full transform transition-all duration-300 group-hover:scale-105 group-hover:bg-gray-800">
-                                <div class="aspect-video w-full mb-4 overflow-hidden rounded-lg">
-                                    <img src="/images/menuiserie.webp" alt="Menuiserie"
-                                        class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110">
-                                </div>
-                                <h3 class="text-xl font-bold text-orange-500 mb-2 group-hover:text-orange-400">
-                                    Menuiserie</h3>
-                                <p class="text-gray-300 text-base">
-                                    Création et pose de charpentes traditionnelles et industrielles. Fabrication
-                                    d'éléments sur-mesure : chevrons, poutres, débords de toit décoratifs. Traitement
-                                    préventif et curatif du bois inclus. Design personnalisé selon vos goûts.
-                                </p>
-                            </div>
-                        </div>
 
-                        <!-- Service 4 Desktop -->
+                        <!-- Service 3 Desktop -->
                         <div class="group">
                             <div
                                 class="bg-gray-900 rounded-xl p-4 h-full transform transition-all duration-300 group-hover:scale-105 group-hover:bg-gray-800">
