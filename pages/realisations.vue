@@ -1,58 +1,80 @@
 <template>
-  <div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
-      <h2 class="text-3xl font-bold text-gray-800">Nos réalisations</h2>
-    </div>
+  <div class="min-h-screen bg-dark-blue">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <h1 class="text-4xl font-bold text-dark mb-12 text-center">
+        Nos réalisations
+      </h1>
 
-    <!-- Pop-ups -->
-    <div v-if="showPopup && !isMobile" class="fixed inset-0 bg-gray-700/50 flex items-center justify-center z-30">
-      <div class="w-4/5 max-w-md bg-white p-6 rounded-lg shadow-lg text-center">
-        <p class="text-gray-700">Déplacez le curseur sur l'image pour découvrir l'effet avant/après !</p>
-        <button @click="closePopup"
-          class="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded transition-colors">
-          Compris
-        </button>
-      </div>
-    </div>
-
-    <div v-if="showPopup && isMobile" class="fixed inset-0 bg-gray-700/50 flex items-center justify-center z-30">
-      <div class="w-4/5 max-w-md bg-white p-6 rounded-lg shadow-lg text-center">
-        <p class="text-gray-700">Cliquez sur l'image pour basculer entre avant/après !</p>
-        <button @click="closePopup"
-          class="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded transition-colors">
-          Compris
-        </button>
-      </div>
-    </div>
-
-    <!-- Contenu principal -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-        <div v-for="(project, index) in projects" :key="index" class="relative">
-          <div @click="toggleImage(index)" @mouseenter="hoverImage(index, true)" @mouseleave="hoverImage(index, false)"
-            class="relative w-full h-40 sm:h-[300px] overflow-hidden cursor-pointer">
-            <img :src="project.before" :alt="`Avant ${project.title}`"
-              class="absolute inset-0 w-full h-full object-cover" />
-            <img :src="project.after" :alt="`Après ${project.title}`" :class="{
-              'absolute inset-0 w-full h-full object-cover transition-opacity duration-300': true,
-              'opacity-0': !project.showAfterImage && !project.isHovered,
-              'opacity-100': project.showAfterImage || project.isHovered
-            }" />
-          </div>
-          <div class="text-center mt-2 sm:mt-4">
-            <h3 class="text-lg sm:text-xl font-bold">{{ project.title }}</h3>
-            <p class="text-sm sm:text-base">{{ project.description }}</p>
-          </div>
+      <!-- Grid d'images -->
+      <div
+        class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+      >
+        <div
+          v-for="(image, index) in images"
+          :key="index"
+          class="group cursor-pointer"
+          @click="openLightbox(index)"
+        >
+          <img
+            :src="image"
+            class="w-full h-40 sm:h-48 md:h-64 object-cover rounded-lg"
+          />
         </div>
       </div>
-    </div>
 
-    <!-- CTA pour voir plus sur Facebook avec l'icône FontAwesome -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
-      <a href="https://www.facebook.com/people/LS-Construct-Klid/100077387097074/?_rdr" target="_blank"
-        rel="noopener noreferrer"
-        class="cta-facebook flex items-center justify-center space-x-2 text-white hover:text-black bg-orange-500 hover:bg-white border-2 border-orange-500 hover:border-black px-6 py-3 rounded-full font-bold uppercase text-sm transition-colors shadow-md hover:shadow-lg">
-        <i class="fab fa-facebook text-xl"></i>
+      <!-- Lightbox -->
+      <div
+        v-if="lightboxOpen"
+        class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center px-4 sm:px-8"
+        @click="closeLightbox"
+        @touchstart="startTouch"
+        @touchend="endTouch"
+      >
+        <div
+          class="relative flex items-center justify-center w-full h-full"
+          @click.stop
+        >
+          <!-- Flèche gauche -->
+          <button
+            @click.stop="prevImage"
+            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-6xl hover:text-orange-500"
+          >
+            ‹
+          </button>
+
+          <!-- Image affichée -->
+          <img
+            :src="images[currentImageIndex]"
+            class="max-h-[80vh] max-w-full sm:max-w-[90vw] object-contain"
+            @click.stop
+          />
+
+          <!-- Flèche droite -->
+          <button
+            @click.stop="nextImage"
+            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-6xl hover:text-orange-500"
+          >
+            ›
+          </button>
+        </div>
+
+        <!-- Bouton de fermeture -->
+        <button
+          @click="closeLightbox"
+          class="absolute top-2 sm:top-4 right-2 sm:right-4 text-white text-3xl sm:text-4xl hover:text-orange-500"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+    <div class="flex items-center justify-center">
+      <a
+        href="https://www.facebook.com/people/LS-Construct-Klid/100077387097074/?_rdr"
+        target="_blank"
+        class="inline-flex items-center justify-center px-6 py-3 text-white font-semibold bg-orange-500 rounded-lg shadow-md hover:bg-orange-600 transition-all duration-300 space-x-2 mb-6"
+      >
+        <i class="fab fa-facebook-f text-lg"></i>
+        <!-- Icône Facebook -->
         <span>Voir plus sur Facebook</span>
       </a>
     </div>
@@ -60,63 +82,63 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+const images = ref([]);
+const lightboxOpen = ref(false);
+const currentImageIndex = ref(0);
+let touchStartX = 0;
 
-const showPopup = ref(true)
-const isMobile = ref(false)
-const projects = ref([
-  {
-    title: "Rénovation de toiture",
-    description: "95m² tuiles noires",
-    before: "/images/avant-toiture.jpg",
-    after: "/images/apres-toiture.jpg",
-    showAfterImage: false,
-    isHovered: false
-  },
-  {
-    title: "Rénovation de toiture",
-    description: "+ panneaux solaires à l'arrière",
-    before: "/images/avant-toiture2.jpg",
-    after: "/images/apres-toiture2.jpg",
-    showAfterImage: false,
-    isHovered: false
-  },
-  {
-    title: "Rénovation de terrasse",
-    description: "Création d'une terrasse en bois",
-    before: "/images/avant-terrasse.jpg",
-    after: "/images/apres-terrasse.jpg",
-    showAfterImage: false,
-    isHovered: false
+// Chargement automatique des images
+onMounted(async () => {
+  try {
+    const loadedImages = await $fetch("/api/images"); // Charger les images depuis l'API Nitro
+    images.value = loadedImages;
+  } catch (error) {
+    console.error("Erreur chargement images:", error);
   }
-])
+});
 
+function openLightbox(index) {
+  currentImageIndex.value = index;
+  lightboxOpen.value = true;
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+  lightboxOpen.value = false;
+  document.body.style.overflow = "auto";
+}
+
+function nextImage() {
+  currentImageIndex.value = (currentImageIndex.value + 1) % images.value.length;
+}
+
+function prevImage() {
+  currentImageIndex.value =
+    currentImageIndex.value === 0
+      ? images.value.length - 1
+      : currentImageIndex.value - 1;
+}
+
+// Gestion des touches clavier
 onMounted(() => {
-  checkDevice()
-  if (localStorage.getItem("popupSeen") === "true") {
-    showPopup.value = false
-  }
-  window.addEventListener('resize', checkDevice)
-})
+  window.addEventListener("keydown", (e) => {
+    if (!lightboxOpen.value) return;
+    if (e.key === "ArrowLeft") prevImage();
+    if (e.key === "ArrowRight") nextImage();
+    if (e.key === "Escape") closeLightbox();
+  });
+});
 
-function checkDevice() {
-  isMobile.value = window.innerWidth <= 768
+// Gestion du swipe tactile pour changer d'image
+function startTouch(e) {
+  touchStartX = e.touches[0].clientX;
 }
 
-function closePopup() {
-  showPopup.value = false
-  localStorage.setItem("popupSeen", "true")
-}
+function endTouch(e) {
+  let touchEndX = e.changedTouches[0].clientX;
+  let deltaX = touchStartX - touchEndX;
 
-function toggleImage(index) {
-  if (isMobile.value) {
-    projects.value[index].showAfterImage = !projects.value[index].showAfterImage
-  }
-}
-
-function hoverImage(index, state) {
-  if (!isMobile.value) {
-    projects.value[index].isHovered = state
-  }
+  if (deltaX > 50) nextImage(); // Swipe gauche → image suivante
+  if (deltaX < -50) prevImage(); // Swipe droite → image précédente
 }
 </script>

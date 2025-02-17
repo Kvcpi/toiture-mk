@@ -14,7 +14,7 @@
                     Bienvenue chez Toiture Mk - Mk Construct
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl text-white font-light mb-6">
-                    Votre partenaire de confiance pour tous vos besoins en toiture
+                    Votre partenaire de confiance pour tous vos travaux de rénovation et construction
                 </p>
                 <div class="mt-8 md:mt-12">
                     <a href="/contact"
