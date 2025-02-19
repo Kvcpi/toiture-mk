@@ -105,8 +105,16 @@ const isLoading = ref(true)
 let touchStartX = 0
 
 // Chargement des images avec useFetch
-const { data: imagesData, error } = await useFetch('/api/images')
+const { data: imagesData, error } = await useFetch('/api/images', {
+  onResponse({ response }) {
+    console.log('Réponse API:', response._data)
+  },
+  onResponseError({ error }) {
+    console.error('Erreur API:', error)
+  }
+})
 const images = computed(() => imagesData.value?.images || [])
+
 
 // Surveillance du chargement des images
 watchEffect(() => {

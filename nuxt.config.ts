@@ -20,19 +20,16 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  // Ajout de la configuration nitro pour les assets publics
+  // Configuration correcte pour Vercel
   nitro: {
-    publicAssets: [
-      {
-        dir: 'public',
-        baseURL: '/',
-        maxAge: 60 * 60 * 24 * 30 // Cache pendant 30 jours
-      }
-    ]
+    preset: 'vercel',
+    publicAssets: [{
+      dir: 'public',
+      maxAge: 60 * 60 * 24 * 365 // Cache pendant 1 an
+    }]
   },
-  // Configuration des assets pour assurer que les images sont correctement gérées
-  experimental: {
-    payloadExtraction: false
+  routeRules: {
+    '/realisations/**': { static: true },
   },
   compatibilityDate: '2025-01-15'
 });

@@ -1,32 +1,32 @@
-// server/utils/getImages.js
-import fs from "fs/promises"
-import path from "path"
+import fs from "fs/promises";
+import path from "path";
 
 export async function getImages() {
   try {
-    const directoryPath = path.join(process.cwd(), "public/realisations")
+    // Chemin spécifique pour Vercel
+    const baseDir = process.env.NODE_ENV === 'production' 
+      ? './' 
+      : process.cwd();
     
-    // Vérification de l'existence du dossier
+    const directoryPath = path.join(baseDir, "public/realisations");
+    console.log('Chemin du dossier:', directoryPath);
+
     try {
-      await fs.access(directoryPath)
+      await fs.access(directoryPath);
     } catch (error) {
-      console.error(`Dossier non trouvé: ${directoryPath}`)
-      throw new Error("Dossier des images non trouvé")
+      console.error(`Dossier non trouvé: ${directoryPath}`);
+      return [];
     }
 
-    // Lecture du dossier
-    const files = await fs.readdir(directoryPath)
-    
-    // Filtrage et formatage des chemins d'images
-    const images = files
-      .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file))
-      .map(file => `/realisations/${file}`)
+    const files = await fs.readdir(directoryPath);
+    console.log('Fichiers trouvés:', files);
 
-    console.log(`${images.length} images trouvées:`, images)
-    return images
-    
+    return files
+      .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file))
+      .map(file => `/realisations/${file}`);
+
   } catch (error) {
-    console.error("Erreur lors de la lecture des images:", error)
-    throw error
+    console.error("Erreur lors de la lecture des images:", error);
+    return [];
   }
 }
