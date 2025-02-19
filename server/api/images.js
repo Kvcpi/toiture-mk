@@ -1,13 +1,19 @@
-import { getImages } from "../utils/getImages";
+// server/api/images.js
+import { getImages } from "../utils/getImages"
 
-let cachedImages = []; // Variable pour stocker les images en cache
-
-export default defineEventHandler(() => {
-  // Vérifier si le cache est vide
-  if (cachedImages.length === 0) {
-    console.log("Chargement des images...");
-    cachedImages = getImages(); // Charger les images une seule fois
+export default defineEventHandler(async (event) => {
+  try {
+    const imagesList = await getImages()
+    return {
+      images: imagesList,
+      success: true
+    }
+  } catch (error) {
+    console.error("Erreur dans l'API images:", error)
+    return {
+      images: [],
+      success: false,
+      error: error.message
+    }
   }
-
-  return cachedImages; // Retourner les images en cache
-});
+})

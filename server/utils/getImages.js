@@ -1,22 +1,32 @@
-import fs from "fs";
-import path from "path";
+// server/utils/getImages.js
+import fs from "fs/promises"
+import path from "path"
 
-/**
- * Fonction pour récupérer la liste des images dans le dossier /public/realisations
- */
-export function getImages() {
-  const directoryPath = path.join(process.cwd(), "public/realisations");
-
+export async function getImages() {
   try {
-    // Lire tous les fichiers du dossier
-    const files = fs.readdirSync(directoryPath);
+    const directoryPath = path.join(process.cwd(), "public/realisations")
+    
+    // Vérification de l'existence du dossier
+    try {
+      await fs.access(directoryPath)
+    } catch (error) {
+      console.error(`Dossier non trouvé: ${directoryPath}`)
+      throw new Error("Dossier des images non trouvé")
+    }
 
-    // Filtrer uniquement les fichiers image
-    return files
+    // Lecture du dossier
+    const files = await fs.readdir(directoryPath)
+    
+    // Filtrage et formatage des chemins d'images
+    const images = files
       .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file))
-      .map(file => `/realisations/${file}`); // Retourner le chemin des images
+      .map(file => `/realisations/${file}`)
+
+    console.log(`${images.length} images trouvées:`, images)
+    return images
+    
   } catch (error) {
-    console.error("Erreur lors de la lecture des images:", error);
-    return [];
+    console.error("Erreur lors de la lecture des images:", error)
+    throw error
   }
 }
