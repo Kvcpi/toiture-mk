@@ -2,7 +2,6 @@ import { defineNuxtConfig } from "nuxt/config";
 
 // nuxt.config.ts
 export default defineNuxtConfig({
-  
   devtools: { enabled: true },
   css: [
     '~/assets/css/main.css',
@@ -22,5 +21,19 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  compatibilityDate: '2025-01-15'
+  compatibilityDate: '2025-01-15',
+  
+  // Ajout du module color-mode
+  modules: ['@nuxtjs/color-mode'],
+  colorMode: {
+    preference: 'system', // default value of $colorMode.preference
+    fallback: 'light', // fallback value if not system preference found
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    classSuffix: '-mode',
+    storage: 'localStorage', // or 'sessionStorage' or 'cookie'
+    storageKey: 'nuxt-color-mode'
+  }
 });

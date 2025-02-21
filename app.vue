@@ -1,14 +1,18 @@
 <template>
   <div>
+    <ColorModeScript />
     <Navbar />
     <NuxtPage />
-    <BackToTop />
     <Footer />
-    <CookieBanner />
   </div>
 </template>
 
 <style>
+
+body {
+  font-family: 'LenaFont', sans-serif;
+}
+
 .slide-fade-enter-active,
 .slide-fade-leave-active {
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -34,14 +38,10 @@
 </style>
 
 <script>
-import BackToTop from './components/BackToTop.vue';
-import CookieBanner from './components/CookieBanner.vue';
 
 export default {
   components: {
-    BackToTop,
     Footer,
-    CookieBanner,
   },
 };
 

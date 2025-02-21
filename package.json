@@ -11,12 +11,17 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@heroicons/vue": "^2.2.0",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@vueuse/motion": "^2.2.6",
+    "framer-motion": "^12.4.2",
     "nuxt": "^3.15.4"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animated": "^2.0.0"
   }
 }
