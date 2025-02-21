@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "routes": [
+      {
+        "src": "/realisations/(.*)",
+        "dest": "/realisations/$1"
+      }
+    ]
+  }

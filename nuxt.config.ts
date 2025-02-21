@@ -1,11 +1,10 @@
 import { defineNuxtConfig } from "nuxt/config";
 
-// nuxt.config.ts
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
     '~/assets/css/main.css',
-    '@fortawesome/fontawesome-free/css/all.min.css' // Ajout de FontAwesome installé localement
+    '@fortawesome/fontawesome-free/css/all.min.css'
   ],
   app: {
     pageTransition: {

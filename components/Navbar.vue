@@ -12,9 +12,8 @@
         <!-- Menu mobile toggle -->
         <div class="flex md:hidden">
           <button @click="toggleMobileMenu"
-            class="w-10 h-10 flex items-center justify-center bg-white/10 dark:bg-white/20 rounded-full hover:bg-[#fe0a44] dark:hover:bg-[#fe0a44] transition-all duration-300">
-            <i class="fa-solid fa-bars transform transition-transform duration-300"
-               :class="{'rotate-90': mobileMenuOpen}"></i>
+            class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-orange-500 transition-all duration-300">
+            <i class="fa-solid fa-trowel-bricks"></i> <!-- Icône d'ouverture seule -->
           </button>
         </div>
 
