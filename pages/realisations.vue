@@ -90,21 +90,49 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
+// Liste statique des images
+const images = [
+  '/realisations/WhatsApp Image 2025-02-13 at 21.31.18.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.31.18 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (5).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (4).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (3).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (6).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (5).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (4).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (3).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.04.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.35.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.34.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.34 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.34 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.33.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.33 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.33 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.32.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.31.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.31 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.31 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.30.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.30 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.30 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.29.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.11.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.11 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.10.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.10 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.05.jpeg'
+]
+
 // État du lightbox
 const lightboxOpen = ref(false)
 const currentImageIndex = ref(0)
-const images = ref([])
-
-// Fonction pour charger les images
-async function loadImages() {
-  try {
-    const response = await fetch('/api/images')
-    const data = await response.json()
-    images.value = data.images
-  } catch (error) {
-    console.error('Erreur lors du chargement des images:', error)
-  }
-}
 
 // Fonctions du lightbox
 function openLightbox(index) {
@@ -119,13 +147,13 @@ function closeLightbox() {
 }
 
 function nextImage() {
-  currentImageIndex.value = (currentImageIndex.value + 1) % images.value.length
+  currentImageIndex.value = (currentImageIndex.value + 1) % images.length
 }
 
 function prevImage() {
   currentImageIndex.value =
     currentImageIndex.value === 0
-      ? images.value.length - 1
+      ? images.length - 1
       : currentImageIndex.value - 1
 }
 
@@ -139,7 +167,6 @@ function handleKeydown(e) {
 
 // Cycle de vie du composant
 onMounted(() => {
-  loadImages()
   window.addEventListener('keydown', handleKeydown)
 })
 
