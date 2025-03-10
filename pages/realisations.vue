@@ -104,52 +104,39 @@ const currentImageIndex = ref(0)
 const isLoading = ref(true)
 let touchStartX = 0
 
-// Chargement des images avec useFetch
-const { data: imagesData, error } = await useFetch('/api/images', {
-  onResponse({ response }) {
-    console.log('Réponse API complète:', response)
-    console.log('Données des images:', response._data)
-    if (!response._data?.images?.length) {
-      console.warn('Aucune image trouvée dans la réponse')
-    }
-  },
-  onResponseError({ error }) {
-    console.error('Erreur API détaillée:', error)
+// Chargement des images avec useAsyncData
+const { data: imagesData, error, pending } = await useAsyncData('images', async () => {
+  try {
+    const response = await $fetch('/api/images')
+    console.log('Réponse API:', response)
+    return response
+  } catch (error) {
+    console.error('Erreur lors du chargement des images:', error)
+    return { images: [] }
   }
 })
+
 const images = computed(() => {
-  console.log('État des images:', {
-    imagesData: imagesData.value,
-    error: error.value,
-    imagesArray: imagesData.value?.images
-  })
-  return imagesData.value?.images || []
+  if (!imagesData.value) return []
+  return imagesData.value.images || []
 })
 
 // Surveillance du chargement des images
 watchEffect(() => {
   if (imagesData.value) {
     isLoading.value = false
-    console.log('État complet du chargement:', {
-      imagesData: imagesData.value,
-      error: error.value,
-      imagesLength: imagesData.value.images?.length
-    })
-    if (!imagesData.value.images?.length) {
-      console.warn('Le tableau d\'images est vide', {
-        imagesData: imagesData.value,
-        error: error.value
-      })
-    }
+    console.log('Images chargées:', imagesData.value)
   }
   if (error.value) {
-    console.error('Erreur de chargement détaillée:', error.value)
+    console.error('Erreur de chargement:', error.value)
   }
 })
 
 // Gestion des erreurs d'image
 function handleImageError(event) {
   console.error(`Erreur de chargement de l'image: ${event.target.src}`)
+  // Remplacer l'image par une image par défaut si nécessaire
+  event.target.src = '/images/placeholder.jpg'
 }
 
 // Fonctions du lightbox
