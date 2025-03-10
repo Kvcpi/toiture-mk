@@ -3,11 +3,8 @@ import path from "path";
 
 export async function getImages() {
   try {
-    // Chemin spécifique pour Vercel
-    const baseDir = process.env.NODE_ENV === 'production' 
-      ? './' 
-      : process.cwd();
-    
+    // Utiliser le chemin absolu pour le dossier public
+    const baseDir = process.cwd();
     const directoryPath = path.join(baseDir, "public/realisations");
     console.log('Chemin du dossier:', directoryPath);
 
