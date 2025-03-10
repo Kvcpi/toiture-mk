@@ -16,77 +16,63 @@
       </div>
 
       <!-- Grid d'images -->
-      <ClientOnly>
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <div
-          v-if="!isLoading && !error"
-          class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          v-for="(image, index) in images"
+          :key="index"
+          class="group cursor-pointer"
+          @click="openLightbox(index)"
         >
-          <div
-            v-for="(image, index) in images"
-            :key="index"
-            class="group cursor-pointer"
-            @click="openLightbox(index)"
-          >
-            <div class="relative w-full h-40 sm:h-48 md:h-64">
-              <img
-                :src="image"
-                :alt="`Réalisation ${index + 1}`"
-                class="w-full h-full object-cover rounded-lg"
-                @error="handleImageError"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-      </ClientOnly>
-
-      <!-- Lightbox -->
-      <ClientOnly>
-        <div
-          v-if="lightboxOpen"
-          class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center px-4 sm:px-8"
-          @click="closeLightbox"
-          @touchstart="startTouch"
-          @touchend="endTouch"
-        >
-          <div
-            class="relative flex items-center justify-center w-full h-full"
-            @click.stop
-          >
-            <!-- Flèche gauche -->
-            <button
-              @click.stop="prevImage"
-              class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-6xl hover:text-orange-500"
-            >
-              ‹
-            </button>
-
-            <!-- Image affichée -->
+          <div class="relative w-full h-40 sm:h-48 md:h-64">
             <img
-              :src="images[currentImageIndex]"
-              class="max-h-[80vh] max-w-full sm:max-w-[90vw] object-contain"
-              @click.stop
+              :src="image"
+              :alt="`Réalisation ${index + 1}`"
+              class="w-full h-full object-cover rounded-lg"
               loading="lazy"
             />
-
-            <!-- Flèche droite -->
-            <button
-              @click.stop="nextImage"
-              class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-6xl hover:text-orange-500"
-            >
-              ›
-            </button>
           </div>
+        </div>
+      </div>
 
-          <!-- Bouton de fermeture -->
+      <!-- Lightbox -->
+      <div
+        v-if="lightboxOpen"
+        class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center px-4 sm:px-8"
+        @click="closeLightbox"
+      >
+        <div class="relative flex items-center justify-center w-full h-full">
+          <!-- Flèche gauche -->
           <button
-            @click="closeLightbox"
-            class="absolute top-2 sm:top-4 right-2 sm:right-4 text-white text-3xl sm:text-4xl hover:text-orange-500"
+            @click.stop="prevImage"
+            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-6xl hover:text-orange-500"
           >
-            ×
+            ‹
+          </button>
+
+          <!-- Image affichée -->
+          <img
+            :src="images[currentImageIndex]"
+            class="max-h-[80vh] max-w-full sm:max-w-[90vw] object-contain"
+            @click.stop
+          />
+
+          <!-- Flèche droite -->
+          <button
+            @click.stop="nextImage"
+            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-6xl hover:text-orange-500"
+          >
+            ›
           </button>
         </div>
-      </ClientOnly>
+
+        <!-- Bouton de fermeture -->
+        <button
+          @click="closeLightbox"
+          class="absolute top-2 sm:top-4 right-2 sm:right-4 text-white text-3xl sm:text-4xl hover:text-orange-500"
+        >
+          ×
+        </button>
+      </div>
     </div>
     <div class="flex items-center justify-center">
       <a
@@ -102,51 +88,51 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
-// État initial
+// Liste statique des images
+const images = [
+  '/realisations/WhatsApp Image 2025-02-13 at 21.31.18.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.31.18 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (5).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (4).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (3).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.28.49 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (6).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (5).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (4).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (3).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.05 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.24.04.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.35.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.34.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.34 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.34 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.33.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.33 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.33 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.32.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.31.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.31 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.31 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.30.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.30 (2).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.30 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.29.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.11.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.11 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.10.jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.10 (1).jpeg',
+  '/realisations/WhatsApp Image 2025-02-13 at 21.11.05.jpeg'
+]
+
+// État du lightbox
 const lightboxOpen = ref(false)
 const currentImageIndex = ref(0)
-const isLoading = ref(true)
-const isClient = ref(false)
-let touchStartX = 0
-
-// Chargement des images avec useAsyncData
-const { data: imagesData, error, pending } = await useAsyncData('images', async () => {
-  try {
-    const response = await $fetch('/api/images')
-    console.log('Réponse API:', response)
-    return response
-  } catch (error) {
-    console.error('Erreur lors du chargement des images:', error)
-    return { images: [] }
-  }
-}, {
-  server: true,
-  lazy: true
-})
-
-const images = computed(() => {
-  if (!imagesData.value) return []
-  return imagesData.value.images || []
-})
-
-// Surveillance du chargement des images
-watchEffect(() => {
-  if (imagesData.value) {
-    isLoading.value = false
-    console.log('Images chargées:', imagesData.value)
-  }
-  if (error.value) {
-    console.error('Erreur de chargement:', error.value)
-  }
-})
-
-// Gestion des erreurs d'image
-function handleImageError(event) {
-  console.error(`Erreur de chargement de l'image: ${event.target.src}`)
-  event.target.src = '/images/placeholder.jpg'
-}
 
 // Fonctions du lightbox
 function openLightbox(index) {
@@ -161,13 +147,13 @@ function closeLightbox() {
 }
 
 function nextImage() {
-  currentImageIndex.value = (currentImageIndex.value + 1) % images.value.length
+  currentImageIndex.value = (currentImageIndex.value + 1) % images.length
 }
 
 function prevImage() {
   currentImageIndex.value =
     currentImageIndex.value === 0
-      ? images.value.length - 1
+      ? images.length - 1
       : currentImageIndex.value - 1
 }
 
@@ -179,22 +165,8 @@ function handleKeydown(e) {
   if (e.key === 'Escape') closeLightbox()
 }
 
-// Gestion du tactile
-function startTouch(e) {
-  touchStartX = e.touches[0].clientX
-}
-
-function endTouch(e) {
-  const touchEndX = e.changedTouches[0].clientX
-  const deltaX = touchStartX - touchEndX
-
-  if (deltaX > 50) nextImage() // Swipe gauche
-  if (deltaX < -50) prevImage() // Swipe droite
-}
-
 // Cycle de vie du composant
 onMounted(() => {
-  isClient.value = true
   window.addEventListener('keydown', handleKeydown)
 })
 
