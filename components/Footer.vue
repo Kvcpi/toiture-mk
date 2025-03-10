@@ -1,68 +1,144 @@
 <template>
-
-  <head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  </head>
-  <footer class="relative bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white py-8">
+  <footer class="bg-white dark:bg-black text-black dark:text-white py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Première rangée : Logo, Coordonnées, Navigation et Réseaux sociaux -->
-      <div class="flex flex-wrap justify-between items-center">
-        <!-- Logo -->
-        <div class="flex-shrink-0 w-full sm:w-auto text-center sm:text-left">
-          <img src="/images/logo2.png" alt="logo-toituremk" class="w-40 h-auto brightness-150 mx-auto sm:mx-0" />
+      <!-- Logo centré au-dessus -->
+      <div class="flex justify-center mb-6">
+        <a href="/">
+          <img
+          src="/images/oviota_rouge_svg.svg"
+          alt="Oviota"
+          class="h-14 w-auto hover:opacity-70"
+        />
+        </a>
+      </div>
+
+      <!-- Sections alignées en grille -->
+      <div
+        class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center md:text-left"
+      >
+        <!-- Navigation principale -->
+        <div>
+          <h3 class="text-black dark:text-white font-bold">Navigation</h3>
+          <nav class="space-y-2 mt-2">
+            <a href="/" class="block hover:text-[#fe0a44] transition-colors"
+              >Home</a
+            >
+            <a
+              href="/client-panel"
+              class="block hover:text-[#fe0a44] transition-colors"
+              >Client Panel</a
+            >
+          </nav>
         </div>
-        <!-- Coordonnées -->
-        <div
-          class="w-full sm:w-auto text-center sm:text-left mt-4 sm:mt-0 text-sm text-gray-300 backdrop-blur-md bg-white/10 p-4 rounded-lg shadow-md">
-          <p><i class="fa-solid fa-location-dot"></i> <a href="https://www.google.com/maps?q=Excelsiorlaan+71,+1930+Zaventem" 
-                  target="_blank" class="hover:text-orange-500 transition-all duration-300">Excelsiorlaan 71, 1930 Zaventem</a></p>
-          <p><i class="fa-solid fa-phone"></i> <a href="tel:+32472870080" class="hover:text-orange-500 transition-all duration-300">0472 87 00 80</a>
-          </p>
-          <p><i class="fa-regular fa-paper-plane"></i> <a href="mailto:mk.construct2020@gmail.com"
-              class="hover:text-orange-500 transition-all duration-300">mk.construct2020@gmail.com</a></p>
+
+        <!-- Resources section -->
+        <div>
+          <h3 class="text-black dark:text-white font-bold">Resources</h3>
+          <nav class="space-y-2 mt-2">
+            <a
+              href="/careers"
+              class="block hover:text-[#fe0a44] transition-colors"
+              >Careers</a
+            >
+            <a
+              href="/technical-status"
+              class="block hover:text-[#fe0a44] transition-colors"
+              >Technical Status</a
+            >
+          </nav>
         </div>
-        <!-- Navigation -->
-        <div class="w-full sm:w-auto mt-4 sm:mt-0">
-          <ul class="flex flex-wrap justify-center sm:justify-start space-x-6">
-            <li>
-              <NuxtLink to="/realisations"
-                class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white"
-                active-class="bg-orange-500 text-white">
-                Réalisations
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/contact"
-                class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white"
-                active-class="bg-orange-500 text-white">
-                Contact
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/privacy"
-                class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white"
-                active-class="bg-orange-500 text-white">
-                Politique de Confidentialité
-              </NuxtLink>
-            </li>
-          </ul>
+
+        <!-- Contact section -->
+        <div>
+          <h3 class="text-black dark:text-white font-bold">Contact</h3>
+          <nav class="space-y-2 mt-2">
+            <a
+              href="mailto:contact@oviota.com"
+              class="block hover:text-[#fe0a44] transition-colors"
+              >Email</a
+            >
+            <p class="block">
+              Sales team:
+              <a
+                href="tel:+32486299769"
+                class="hover:text-[#fe0a44] transition-colors whitespace-nowrap"
+                >(+32) 486 29 97 69</a
+              >
+            </p>
+          </nav>
         </div>
-        <!-- Réseaux sociaux -->
-        <div class="w-full sm:w-auto mt-4 sm:mt-0 text-center sm:text-left">
-          <a href="https://www.facebook.com/people/LS-Construct-Klid/100077387097074/?_rdr" target="_blank"
-            class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-orange-500 transition-all duration-300 mx-auto sm:mx-0">
-            <i class="fab fa-facebook-f text-lg text-white"></i>
-          </a>
+
+        <!-- Legal section -->
+        <div>
+          <h3 class="text-black dark:text-white font-bold">Legal</h3>
+          <nav class="space-y-2 mt-2">
+            <a
+              href="/terms"
+              class="block hover:text-[#fe0a44] transition-colors"
+              >Terms of Services</a
+            >
+            <a
+              href="/privacy"
+              class="block hover:text-[#fe0a44] transition-colors"
+              >Privacy Policy</a
+            >
+            <a href="/rgpd" class="block hover:text-[#fe0a44] transition-colors"
+              >RGPD</a
+            >
+          </nav>
+        </div>
+        <!--Location section-->
+        <div>
+          <h3 class="text-black dark:text-white font-bold">Location</h3>
+          <p class="mt-2">Rue au bois 365b, 1150 Brussels</p>
+          <p>Belgium</p>
         </div>
       </div>
 
-      <!-- Deuxième rangée : Copyright -->
-      <div class="mt-6 text-center">
-        <p class="text-sm text-gray-400">&copy; 2025 Tous droits réservés.</p>
+      <!-- Bottom section -->
+      <div class="border-t border-gray-800 pt-8 mt-8 text-center md:text-left">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-sm">© Copyright Oviota 2025. All rights reserved.</p>
+          <div class="flex space-x-4 mt-4 md:mt-0">
+            <a
+              href="https://www.linkedin.com/company/oviota/"
+              class="text-black dark:text-white hover:text-[#fe0a44] transition-colors"
+            >
+              <i class="fab fa-linkedin text-xl"></i>
+            </a>
+            <a
+              href="https://www.instagram.com/joinoviota"
+              class="text-black dark:text-white hover:text-[#fe0a44] transition-colors"
+            >
+              <i class="fab fa-instagram text-xl"></i>
+            </a>
+            <a
+              href="https://discord.com/invite/6HrSzYanqD"
+              class="text-black dark:text-white hover:text-[#fe0a44] transition-colors"
+            >
+              <i class="fab fa-discord text-xl"></i>
+            </a>
+            <a
+              href="https://x.com/joinoviota"
+              class="text-black dark:text-white hover:text-[#fe0a44] transition-colors"
+            >
+              <i class="fa-brands fa-x-twitter text-xl"></i>
+            </a>
+            <a
+              href="https://t.me/oviota"
+              class="text-black dark:text-white hover:text-[#fe0a44] transition-colors"
+            >
+              <i class="fab fa-telegram text-xl"></i>
+            </a>
+            <a
+              href="https://www.youtube.com/@Oviota"
+              class="text-dark dark:text-white hover:text-[#fe0a44] transition-colors"
+            >
+              <i class="fab fa-youtube text-xl"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Effet lumineux en bas -->
-    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-transparent"></div>
   </footer>
 </template>
