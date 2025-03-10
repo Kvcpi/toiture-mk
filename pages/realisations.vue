@@ -107,17 +107,22 @@ let touchStartX = 0
 // Chargement des images avec useFetch
 const { data: imagesData, error } = await useFetch('/api/images', {
   onResponse({ response }) {
-    console.log('Réponse API:', response._data)
+    console.log('Réponse API complète:', response)
+    console.log('Données des images:', response._data)
     if (!response._data?.images?.length) {
       console.warn('Aucune image trouvée dans la réponse')
     }
   },
   onResponseError({ error }) {
-    console.error('Erreur API:', error)
+    console.error('Erreur API détaillée:', error)
   }
 })
 const images = computed(() => {
-  console.log('Images computed:', imagesData.value?.images)
+  console.log('État des images:', {
+    imagesData: imagesData.value,
+    error: error.value,
+    imagesArray: imagesData.value?.images
+  })
   return imagesData.value?.images || []
 })
 
@@ -125,13 +130,20 @@ const images = computed(() => {
 watchEffect(() => {
   if (imagesData.value) {
     isLoading.value = false
-    console.log('Images chargées:', imagesData.value)
+    console.log('État complet du chargement:', {
+      imagesData: imagesData.value,
+      error: error.value,
+      imagesLength: imagesData.value.images?.length
+    })
     if (!imagesData.value.images?.length) {
-      console.warn('Le tableau d\'images est vide')
+      console.warn('Le tableau d\'images est vide', {
+        imagesData: imagesData.value,
+        error: error.value
+      })
     }
   }
   if (error.value) {
-    console.error('Erreur de chargement:', error.value)
+    console.error('Erreur de chargement détaillée:', error.value)
   }
 })
 
