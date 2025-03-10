@@ -5,8 +5,19 @@
         Nos réalisations
       </h1>
 
+      <!-- État de chargement -->
+      <div v-if="isLoading" class="text-center py-8">
+        <p class="text-white">Chargement des images...</p>
+      </div>
+
+      <!-- Message d'erreur -->
+      <div v-else-if="error" class="text-center py-8">
+        <p class="text-red-500">Une erreur est survenue lors du chargement des images.</p>
+      </div>
+
       <!-- Grid d'images -->
       <div
+        v-else
         class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
       >
         <div
@@ -15,10 +26,14 @@
           class="group cursor-pointer"
           @click="openLightbox(index)"
         >
-          <img
-            :src="image"
-            class="w-full h-40 sm:h-48 md:h-64 object-cover rounded-lg"
-          />
+          <div class="relative w-full h-40 sm:h-48 md:h-64">
+            <img
+              :src="image"
+              :alt="`Réalisation ${index + 1}`"
+              class="w-full h-full object-cover rounded-lg"
+              @error="handleImageError"
+            />
+          </div>
         </div>
       </div>
 
@@ -68,13 +83,12 @@
       </div>
     </div>
     <div class="flex items-center justify-center">
-      <a
-        href="https://www.facebook.com/people/LS-Construct-Klid/100077387097074/?_rdr"
+      
+        <a href="https://www.facebook.com/people/LS-Construct-Klid/100077387097074/?_rdr"
         target="_blank"
         class="inline-flex items-center justify-center px-6 py-3 text-white font-semibold bg-orange-500 rounded-lg shadow-md hover:bg-orange-600 transition-all duration-300 space-x-2 mb-6"
       >
         <i class="fab fa-facebook-f text-lg"></i>
-        <!-- Icône Facebook -->
         <span>Voir plus sur Facebook</span>
       </a>
     </div>
@@ -82,63 +96,93 @@
 </template>
 
 <script setup>
-const images = ref([]);
-const lightboxOpen = ref(false);
-const currentImageIndex = ref(0);
-let touchStartX = 0;
+import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
 
-// Chargement automatique des images
-onMounted(async () => {
-  try {
-    const loadedImages = await $fetch("/api/images"); // Charger les images depuis l'API Nitro
-    images.value = loadedImages;
-  } catch (error) {
-    console.error("Erreur chargement images:", error);
+// État initial
+const lightboxOpen = ref(false)
+const currentImageIndex = ref(0)
+const isLoading = ref(true)
+let touchStartX = 0
+
+// Chargement des images avec useFetch
+const { data: imagesData, error } = await useFetch('/api/images', {
+  onResponse({ response }) {
+    console.log('Réponse API:', response._data)
+  },
+  onResponseError({ error }) {
+    console.error('Erreur API:', error)
   }
-});
+})
+const images = computed(() => imagesData.value?.images || [])
 
+
+// Surveillance du chargement des images
+watchEffect(() => {
+  if (imagesData.value) {
+    isLoading.value = false
+    console.log('Images chargées:', imagesData.value)
+  }
+  if (error.value) {
+    console.error('Erreur de chargement:', error.value)
+  }
+})
+
+// Gestion des erreurs d'image
+function handleImageError(event) {
+  console.error(`Erreur de chargement de l'image: ${event.target.src}`)
+}
+
+// Fonctions du lightbox
 function openLightbox(index) {
-  currentImageIndex.value = index;
-  lightboxOpen.value = true;
-  document.body.style.overflow = "hidden";
+  currentImageIndex.value = index
+  lightboxOpen.value = true
+  document.body.style.overflow = 'hidden'
 }
 
 function closeLightbox() {
-  lightboxOpen.value = false;
-  document.body.style.overflow = "auto";
+  lightboxOpen.value = false
+  document.body.style.overflow = 'auto'
 }
 
 function nextImage() {
-  currentImageIndex.value = (currentImageIndex.value + 1) % images.value.length;
+  currentImageIndex.value = (currentImageIndex.value + 1) % images.value.length
 }
 
 function prevImage() {
   currentImageIndex.value =
     currentImageIndex.value === 0
       ? images.value.length - 1
-      : currentImageIndex.value - 1;
+      : currentImageIndex.value - 1
 }
 
-// Gestion des touches clavier
-onMounted(() => {
-  window.addEventListener("keydown", (e) => {
-    if (!lightboxOpen.value) return;
-    if (e.key === "ArrowLeft") prevImage();
-    if (e.key === "ArrowRight") nextImage();
-    if (e.key === "Escape") closeLightbox();
-  });
-});
+// Gestion du clavier
+function handleKeydown(e) {
+  if (!lightboxOpen.value) return
+  if (e.key === 'ArrowLeft') prevImage()
+  if (e.key === 'ArrowRight') nextImage()
+  if (e.key === 'Escape') closeLightbox()
+}
 
-// Gestion du swipe tactile pour changer d'image
+// Gestion du tactile
 function startTouch(e) {
-  touchStartX = e.touches[0].clientX;
+  touchStartX = e.touches[0].clientX
 }
 
 function endTouch(e) {
-  let touchEndX = e.changedTouches[0].clientX;
-  let deltaX = touchStartX - touchEndX;
+  const touchEndX = e.changedTouches[0].clientX
+  const deltaX = touchStartX - touchEndX
 
-  if (deltaX > 50) nextImage(); // Swipe gauche → image suivante
-  if (deltaX < -50) prevImage(); // Swipe droite → image précédente
+  if (deltaX > 50) nextImage() // Swipe gauche
+  if (deltaX < -50) prevImage() // Swipe droite
 }
+
+// Cycle de vie du composant
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
+  document.body.style.overflow = 'auto'
+})
 </script>
