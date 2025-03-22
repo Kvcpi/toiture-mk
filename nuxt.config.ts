@@ -1,5 +1,3 @@
-import { defineNuxtConfig } from "nuxt/config";
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
@@ -20,6 +18,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  plugins: [
+    '~/plugins/aos.js', // Ajout du plugin AOS
+  ],
   // Configuration correcte pour Vercel
   nitro: {
     preset: 'vercel',

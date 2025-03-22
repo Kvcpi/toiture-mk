@@ -127,7 +127,19 @@ const images = [
   '/realisations/33.jpeg',
   '/realisations/34.jpeg',
   '/realisations/35.jpeg',
-  '/realisations/36.jpeg'
+  '/realisations/36.jpeg',
+  '/realisations/37.jpg',
+  '/realisations/38.jpg',
+  '/realisations/39.jpg',
+  '/realisations/40.jpg',
+  '/realisations/41.jpg',
+  '/realisations/42.jpg',
+  '/realisations/43.jpg',
+  '/realisations/44.jpg',
+  '/realisations/45.jpg',
+  '/realisations/46.jpg'
+
+  
 ]
 
 // État du lightbox
