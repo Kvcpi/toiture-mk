@@ -20,6 +20,7 @@ export default defineNuxtConfig({
   },
   plugins: [
     '~/plugins/aos.js', // Ajout du plugin AOS
+    '~/plugins/gsap.js'
   ],
   // Configuration correcte pour Vercel
   nitro: {
