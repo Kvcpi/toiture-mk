@@ -28,7 +28,8 @@ export default defineNuxtConfig({
     publicAssets: [{
       dir: 'public',
       maxAge: 60 * 60 * 24 * 365 // Cache pendant 1 an
-    }]
+    }],
+    minify: true
   },
   routeRules: {
     '/realisations/**': { static: true },
@@ -36,5 +37,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-15',
   build: {
     transpile: ['gsap']
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['gsap']
+    }
   }
 });
