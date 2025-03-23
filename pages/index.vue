@@ -356,14 +356,13 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, defineComponent } from "vue";
+import { onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import ScrollToPlugin from "gsap/ScrollToPlugin";
+import { useNuxtApp } from "#app";
 
 // Initialiser le router
 const router = useRouter();
+const { $gsap } = useNuxtApp();
 
 // Fonction de navigation vers la page de contact
 const navigateToContact = () => {
@@ -377,12 +376,9 @@ const navigateToContact = () => {
   }
 };
 
-// Enregistrer les plugins
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
 onMounted(() => {
   // Animation du fond de la section Hero
-  gsap.to(".hero-background", {
+  $gsap.to(".hero-background", {
     scale: 1.1,
     duration: 8,
     ease: "sine.inOut",
@@ -391,18 +387,18 @@ onMounted(() => {
   });
 
   // Animation du titre (lettre par lettre)
-  const heroLetters = gsap.utils.toArray(".hero-letter");
-  gsap.set(heroLetters, { opacity: 0, y: 50 });
+  const heroLetters = $gsap.utils.toArray(".hero-letter");
+  $gsap.set(heroLetters, { opacity: 0, y: 50 });
 
   // Préparation de l'animation du bouton CTA
-  gsap.set(".CTA-button", {
+  $gsap.set(".CTA-button", {
     scale: 0.8,
     opacity: 0,
     rotationY: -15,
     transformOrigin: "center center",
   });
 
-  const heroTimeline = gsap.timeline({
+  const heroTimeline = $gsap.timeline({
     scrollTrigger: {
       trigger: "header",
       start: "top center",
@@ -465,7 +461,7 @@ onMounted(() => {
   const ctaButton = document.querySelector(".CTA-button");
   if (ctaButton) {
     ctaButton.addEventListener("mouseenter", () => {
-      gsap.to(".CTA-button", {
+      $gsap.to(".CTA-button", {
         scale: 1.05,
         duration: 0.3,
         boxShadow: "0 6px 12px rgba(0,0,0,0.15)",
@@ -474,7 +470,7 @@ onMounted(() => {
     });
 
     ctaButton.addEventListener("mouseleave", () => {
-      gsap.to(".CTA-button", {
+      $gsap.to(".CTA-button", {
         scale: 1,
         duration: 0.3,
         boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
@@ -484,7 +480,7 @@ onMounted(() => {
   }
 
   // Animation des éléments d'arrière-plan dans la section À propos
-  gsap.to(".about-bg-element", {
+  $gsap.to(".about-bg-element", {
     rotation: 360,
     duration: 40,
     repeat: -1,
@@ -492,7 +488,7 @@ onMounted(() => {
   });
 
   // Animation À propos
-  const aboutTimeline = gsap.timeline({
+  const aboutTimeline = $gsap.timeline({
     scrollTrigger: {
       trigger: ".about-title",
       start: "top 80%",
@@ -541,7 +537,7 @@ onMounted(() => {
     );
 
   // Animation des images À propos
-  gsap.from(".about-img-container-1", {
+  $gsap.from(".about-img-container-1", {
     scrollTrigger: {
       trigger: ".about-img-container-1",
       start: "top 80%",
@@ -557,7 +553,7 @@ onMounted(() => {
     ease: "power3.out",
   });
 
-  gsap.from(".about-img-container-2", {
+  $gsap.from(".about-img-container-2", {
     scrollTrigger: {
       trigger: ".about-img-container-2",
       start: "top 80%",
@@ -575,7 +571,7 @@ onMounted(() => {
   });
 
   // Effet de zoom sur les images quand on scroll
-  gsap.to(".about-img-1", {
+  $gsap.to(".about-img-1", {
     scrollTrigger: {
       trigger: ".about-img-container-1",
       start: "top bottom",
@@ -587,7 +583,7 @@ onMounted(() => {
     ease: "none",
   });
 
-  gsap.to(".about-img-2", {
+  $gsap.to(".about-img-2", {
     scrollTrigger: {
       trigger: ".about-img-container-2",
       start: "top bottom",
@@ -600,7 +596,7 @@ onMounted(() => {
   });
 
   // Animation des éléments d'arrière-plan dans la section Service
-  gsap.to(".service-bg-element", {
+  $gsap.to(".service-bg-element", {
     rotation: -360,
     duration: 40,
     repeat: -1,
@@ -608,7 +604,7 @@ onMounted(() => {
   });
 
   // Animation Services
-  const servicesTimeline = gsap.timeline({
+  const servicesTimeline = $gsap.timeline({
     scrollTrigger: {
       trigger: ".services-title",
       start: "top 80%",
@@ -659,10 +655,10 @@ onMounted(() => {
     );
 
   // Animation des images des services lors du scroll
-  gsap.utils
+  $gsap.utils
     .toArray([".service-img-1", ".service-img-2", ".service-img-3"])
     .forEach((img, i) => {
-      gsap.to(img, {
+      $gsap.to(img, {
         scrollTrigger: {
           trigger: img,
           start: "top bottom",
@@ -675,14 +671,14 @@ onMounted(() => {
       });
     });
   // Préparation de l'animation du second bouton
-  gsap.set(".second-CTA-button", {
+  $gsap.set(".second-CTA-button", {
     scale: 0.8,
     opacity: 0,
     rotationY: -15,
     transformOrigin: "center center",
   });
 
-  const secondButtonTimeline = gsap.timeline({
+  const secondButtonTimeline = $gsap.timeline({
     scrollTrigger: {
       trigger: ".second-CTA-button",
       start: "top 80%", // Déclenchement quand le haut du bouton atteint 80% de la hauteur de l'écran
@@ -714,7 +710,7 @@ onMounted(() => {
   const secondCtaButton = document.querySelector(".second-CTA-button");
   if (secondCtaButton) {
     secondCtaButton.addEventListener("mouseenter", () => {
-      gsap.to(".second-CTA-button", {
+      $gsap.to(".second-CTA-button", {
         scale: 1.05,
         duration: 0.3,
         boxShadow: "0 6px 12px rgba(0,0,0,0.15)",
@@ -723,7 +719,7 @@ onMounted(() => {
     });
 
     secondCtaButton.addEventListener("mouseleave", () => {
-      gsap.to(".second-CTA-button", {
+      $gsap.to(".second-CTA-button", {
         scale: 1,
         duration: 0.3,
         boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
@@ -733,7 +729,7 @@ onMounted(() => {
   }
 
   // Animation de l'indicateur de défilement
-  gsap.to(".hero-scroll-indicator", {
+  $gsap.to(".hero-scroll-indicator", {
     y: 10,
     duration: 1.5,
     repeat: -1,
@@ -742,19 +738,19 @@ onMounted(() => {
   });
 
   // Effet parallaxe pour la section héro
-  ScrollTrigger.create({
+  $gsap.ScrollTrigger.create({
     trigger: "header",
     start: "top top",
     end: "bottom top",
     scrub: true,
     markers: false,
     onUpdate: (self) => {
-      gsap.to(".hero-title", {
+      $gsap.to(".hero-title", {
         y: self.progress * 100,
         duration: 0.1,
         ease: "none",
       });
-      gsap.to(".hero-subtitle", {
+      $gsap.to(".hero-subtitle", {
         y: self.progress * 70,
         duration: 0.1,
         ease: "none",
@@ -773,10 +769,14 @@ onMounted(() => {
 
 onUnmounted(() => {
   // Nettoyer les ScrollTriggers lorsque le composant est démonté
-  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  if ($gsap && $gsap.ScrollTrigger) {
+    $gsap.ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  }
 
   // Arrêter toutes les animations en cours
-  gsap.killTweensOf("*");
+  if ($gsap) {
+    $gsap.killTweensOf("*");
+  }
 
   // Supprimer les écouteurs d'événements
   document.querySelectorAll(".CTA-button").forEach((button) => {

@@ -19,8 +19,8 @@ export default defineNuxtConfig({
     },
   },
   plugins: [
-    '~/plugins/aos.js', // Ajout du plugin AOS
-    '~/plugins/gsap.js'
+    '~/plugins/aos.js',
+    '~/plugins/gsap.client.ts'
   ],
   // Configuration correcte pour Vercel
   nitro: {
@@ -33,5 +33,8 @@ export default defineNuxtConfig({
   routeRules: {
     '/realisations/**': { static: true },
   },
-  compatibilityDate: '2025-01-15'
+  compatibilityDate: '2025-01-15',
+  build: {
+    transpile: ['gsap']
+  }
 });
