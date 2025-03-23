@@ -1,2 +1,0 @@
-import{hasInjectionContext as r,inject as e}from"vue";import{t}from"./server.mjs";import{u as n,h as o}from"../routes/renderer.mjs";function useHead(u,s={}){const i=function(n){var u;const s=n||t();return(null==(u=null==s?void 0:s.ssrContext)?void 0:u.head)||(null==s?void 0:s.runWithContext((()=>{if(r())return e(o)})))}(s.nuxt);if(i)return n(u,{head:i,...s})}export{useHead as u};
-//# sourceMappingURL=v3.mjs.map

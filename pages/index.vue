@@ -18,7 +18,7 @@
         class="relative z-30 max-w-7xl mx-auto text-white px-4 sm:px-6 lg:px-8 py-12 flex flex-col justify-center items-center text-center"
       >
         <h1
-          class="hero-title text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-orange-500 tracking-wide"
+          class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-orange-500 tracking-wide leading-tight"
         >
           <span class="hero-letter inline-block">B</span>
           <span class="hero-letter inline-block">i</span>
@@ -45,6 +45,21 @@
           <span class="hero-letter inline-block">&nbsp;</span>
           <span class="hero-letter inline-block">M</span>
           <span class="hero-letter inline-block">k</span>
+          <span class="hero-letter inline-block">&nbsp;</span>
+          <span class="hero-letter inline-block">-</span>
+          <span class="hero-letter inline-block">&nbsp;</span>
+          <span class="hero-letter inline-block">M</span>
+          <span class="hero-letter inline-block">k</span>
+          <span class="hero-letter inline-block">&nbsp;</span>
+          <span class="hero-letter inline-block">C</span>
+          <span class="hero-letter inline-block">o</span>
+          <span class="hero-letter inline-block">n</span>
+          <span class="hero-letter inline-block">s</span>
+          <span class="hero-letter inline-block">t</span>
+          <span class="hero-letter inline-block">r</span>
+          <span class="hero-letter inline-block">u</span>
+          <span class="hero-letter inline-block">c</span>
+          <span class="hero-letter inline-block">t</span>
         </h1>
         <p
           class="hero-subtitle text-lg sm:text-xl md:text-2xl text-white font-normal mb-6"
@@ -362,7 +377,7 @@ import { useNuxtApp } from "#app";
 
 // Initialiser le router
 const router = useRouter();
-const { $gsap } = useNuxtApp();
+const { $gsap, $ScrollTrigger } = useNuxtApp();
 
 // Fonction de navigation vers la page de contact
 const navigateToContact = () => {
@@ -377,410 +392,333 @@ const navigateToContact = () => {
 };
 
 onMounted(() => {
-  // Animation du fond de la section Hero
-  $gsap.to(".hero-background", {
-    scale: 1.1,
-    duration: 8,
-    ease: "sine.inOut",
-    repeat: -1,
-    yoyo: true,
-  });
+  const { $gsap, $ScrollTrigger } = useNuxtApp();
+  
+  if (!$gsap || !$ScrollTrigger) {
+    console.warn('GSAP ou ScrollTrigger n\'est pas disponible');
+    return;
+  }
 
-  // Animation du titre (lettre par lettre)
-  const heroLetters = $gsap.utils.toArray(".hero-letter");
-  $gsap.set(heroLetters, { opacity: 0, y: 50 });
+  // S'assurer que nous sommes côté client
+  if (process.client) {
+    // Détection du mobile
+    const isMobile = window.innerWidth < 768;
 
-  // Préparation de l'animation du bouton CTA
-  $gsap.set(".CTA-button", {
-    scale: 0.8,
-    opacity: 0,
-    rotationY: -15,
-    transformOrigin: "center center",
-  });
+    // Animation du fond de la section Hero (réduite sur mobile)
+    $gsap.to(".hero-background", {
+      scale: isMobile ? 1.05 : 1.1,
+      duration: 8,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+    });
 
-  const heroTimeline = $gsap.timeline({
-    scrollTrigger: {
-      trigger: "header",
-      start: "top center",
-      end: "bottom top",
-      toggleActions: "restart none none reverse",
-      markers: false,
-    },
-  });
+    // Animation du titre (lettre par lettre)
+    const heroLetters = $gsap.utils.toArray(".hero-letter");
+    $gsap.set(heroLetters, { opacity: 0, y: 50 });
 
-  heroTimeline
-    .to(heroLetters, {
-      opacity: 1,
-      y: 0,
-      duration: 0.05,
-      stagger: 0.03,
-      ease: "back.out(3)",
-    })
-    .from(
-      ".hero-subtitle",
-      {
+    // Préparation de l'animation du bouton CTA
+    $gsap.set(".CTA-button", {
+      scale: 0.8,
+      opacity: 0,
+      rotationY: -15,
+      transformOrigin: "center center",
+    });
+
+    // Animation de l'indicateur de défilement
+    $gsap.to(".hero-scroll-indicator", {
+      y: 10,
+      duration: 1.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    // Création des ScrollTriggers avec ajustements mobile
+    const heroTimeline = $gsap.timeline({
+      scrollTrigger: {
+        trigger: "header",
+        start: "top center",
+        end: "bottom top",
+        toggleActions: "restart none none reverse",
+      }
+    });
+
+    // Animations du héro
+    heroTimeline
+      .to(heroLetters, {
+        opacity: 1,
+        y: 0,
+        duration: 0.05,
+        stagger: isMobile ? 0.02 : 0.03,
+        ease: "back.out(3)",
+      })
+      .from(".hero-subtitle", {
         y: 30,
         opacity: 0,
         duration: 0.8,
         ease: "power2.out",
-      },
-      "-=0.4"
-    )
-    // Animation améliorée du bouton CTA
-    .to(
-      ".CTA-button",
-      {
+      }, "-=0.4")
+      .to(".CTA-button", {
         opacity: 1,
         scale: 1,
         rotationY: 0,
         duration: 1.2,
         ease: "elastic.out(1.2, 0.4)",
+      }, "-=0.2")
+      .to(".CTA-button", {
+        scale: 1.05,
+        duration: 0.8,
+        repeat: 1,
+        yoyo: true,
+        ease: "power1.inOut",
+      });
+
+    // Effet parallaxe pour la section héro (réduit sur mobile)
+    $ScrollTrigger.create({
+      trigger: "header",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+      onUpdate: (self) => {
+        const multiplier = isMobile ? 0.5 : 1;
+        $gsap.to(".hero-title", {
+          y: self.progress * 100 * multiplier,
+          duration: 0.1,
+          ease: "none",
+        });
+        $gsap.to(".hero-subtitle", {
+          y: self.progress * 70 * multiplier,
+          duration: 0.1,
+          ease: "none",
+        });
       },
-      "-=0.2"
-    )
-    // Ajout d'un effet de pulsation subtil après l'apparition
-    .to(".CTA-button", {
-      scale: 1.05,
-      duration: 0.8,
-      repeat: 1,
-      yoyo: true,
-      ease: "power1.inOut",
-    })
-    .from(
-      ".hero-scroll-indicator",
-      {
+    });
+
+    // Animation des éléments d'arrière-plan (plus lent sur mobile)
+    const bgDuration = isMobile ? 60 : 40;
+    $gsap.to(".about-bg-element", {
+      rotation: 360,
+      duration: bgDuration,
+      repeat: -1,
+      ease: "none",
+    });
+
+    $gsap.to(".service-bg-element", {
+      rotation: -360,
+      duration: bgDuration,
+      repeat: -1,
+      ease: "none",
+    });
+
+    // Animation des sections About et Services
+    ["about", "services"].forEach((section) => {
+      const timeline = $gsap.timeline({
+        scrollTrigger: {
+          trigger: `.${section}-title`,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "restart none none reverse",
+        }
+      });
+
+      timeline
+        .from(`.${section}-title`, {
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          ease: "back.out(1.7)",
+        })
+        .from(`.${section}-text-1, .${section}-text-2, .${section}-text-3`, {
+          x: isMobile ? -20 : -50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power2.out",
+        }, "-=0.4");
+    });
+
+    // Animation des images avec ajustements mobile
+    [1, 2].forEach((num) => {
+      $gsap.from(`.about-img-container-${num}`, {
+        scrollTrigger: {
+          trigger: `.about-img-container-${num}`,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "restart none none reverse",
+        },
+        x: isMobile ? 50 : 100,
+        y: num === 1 ? (isMobile ? 25 : 50) : (isMobile ? -25 : -50),
         opacity: 0,
-        y: -20,
+        rotation: num === 1 ? (isMobile ? 5 : 10) : (isMobile ? -5 : -10),
         duration: 1,
         ease: "power3.out",
-      },
-      "-=1.2"
-    );
+        delay: num === 2 ? 0.2 : 0,
+      });
 
-  // Ajout d'un effet hover interactif pour le bouton
-  const ctaButton = document.querySelector(".CTA-button");
-  if (ctaButton) {
-    ctaButton.addEventListener("mouseenter", () => {
-      $gsap.to(".CTA-button", {
-        scale: 1.05,
-        duration: 0.3,
-        boxShadow: "0 6px 12px rgba(0,0,0,0.15)",
-        ease: "power1.out",
+      // Effet de zoom au scroll ajusté pour mobile
+      $gsap.to(`.about-img-${num}`, {
+        scrollTrigger: {
+          trigger: `.about-img-container-${num}`,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+        scale: isMobile ? 1.1 : 1.2,
+        ease: "none",
       });
     });
 
-    ctaButton.addEventListener("mouseleave", () => {
-      $gsap.to(".CTA-button", {
-        scale: 1,
-        duration: 0.3,
-        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-        ease: "power1.in",
+    // Animation améliorée des cartes de service
+    const serviceCards = [
+      { selector: ".service-card-1", x: -100, y: 0, rotation: -5 },
+      { selector: ".service-card-2", x: 0, y: 100, rotation: 0 },
+      { selector: ".service-card-3", x: 100, y: 0, rotation: 5 },
+    ];
+
+    // Animation des cartes de service (mobile et desktop)
+    serviceCards.forEach((card, index) => {
+      // Animation principale de la carte
+      $gsap.from(card.selector, {
+        scrollTrigger: {
+          trigger: card.selector,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "restart none none reverse",
+        },
+        x: isMobile ? 0 : card.x,
+        y: isMobile ? 50 : card.y,
+        rotation: isMobile ? 0 : card.rotation,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: index * (isMobile ? 0.3 : 0.2),
       });
+
+      // Animation des éléments internes de la carte
+      const timeline = $gsap.timeline({
+        scrollTrigger: {
+          trigger: card.selector,
+          start: "top 80%",
+          toggleActions: "restart none none reverse",
+        }
+      });
+
+      timeline
+        .from(`${card.selector} img`, {
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        })
+        .from(`${card.selector} h3`, {
+          y: 20,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.out",
+        }, "-=0.2")
+        .from(`${card.selector} p`, {
+          y: 20,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.out",
+        }, "-=0.2");
     });
-  }
 
-  // Animation des éléments d'arrière-plan dans la section À propos
-  $gsap.to(".about-bg-element", {
-    rotation: 360,
-    duration: 40,
-    repeat: -1,
-    ease: "none",
-  });
-
-  // Animation À propos
-  const aboutTimeline = $gsap.timeline({
-    scrollTrigger: {
-      trigger: ".about-title",
-      start: "top 80%",
-      end: "bottom 20%",
-      toggleActions: "restart none none reverse",
-      markers: false,
-    },
-  });
-
-  aboutTimeline
-    .from(".about-title", {
-      opacity: 0,
-      scale: 0.7,
-      duration: 0.8,
-      ease: "back.out(1.7)",
-    })
-    .from(
-      ".about-text-1",
-      {
-        x: -50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.5"
-    )
-    .from(
-      ".about-text-2",
-      {
-        x: -50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.6"
-    )
-    .from(
-      ".about-text-3",
-      {
-        x: -50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.6"
-    );
-
-  // Animation des images À propos
-  $gsap.from(".about-img-container-1", {
-    scrollTrigger: {
-      trigger: ".about-img-container-1",
-      start: "top 80%",
-      end: "bottom 20%",
-      toggleActions: "restart none none reverse",
-      markers: false,
-    },
-    x: 100,
-    y: 50,
-    opacity: 0,
-    rotation: 10,
-    duration: 1,
-    ease: "power3.out",
-  });
-
-  $gsap.from(".about-img-container-2", {
-    scrollTrigger: {
-      trigger: ".about-img-container-2",
-      start: "top 80%",
-      end: "bottom 20%",
-      toggleActions: "restart none none reverse",
-      markers: false,
-    },
-    x: 100,
-    y: -50,
-    opacity: 0,
-    rotation: -10,
-    duration: 1,
-    ease: "power3.out",
-    delay: 0.2,
-  });
-
-  // Effet de zoom sur les images quand on scroll
-  $gsap.to(".about-img-1", {
-    scrollTrigger: {
-      trigger: ".about-img-container-1",
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1,
-      markers: false,
-    },
-    scale: 1.2,
-    ease: "none",
-  });
-
-  $gsap.to(".about-img-2", {
-    scrollTrigger: {
-      trigger: ".about-img-container-2",
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1,
-      markers: false,
-    },
-    scale: 1.2,
-    ease: "none",
-  });
-
-  // Animation des éléments d'arrière-plan dans la section Service
-  $gsap.to(".service-bg-element", {
-    rotation: -360,
-    duration: 40,
-    repeat: -1,
-    ease: "none",
-  });
-
-  // Animation Services
-  const servicesTimeline = $gsap.timeline({
-    scrollTrigger: {
-      trigger: ".services-title",
-      start: "top 80%",
-      end: "bottom 20%",
-      toggleActions: "restart none none reverse",
-      markers: false,
-    },
-  });
-
-  servicesTimeline
-    .from(".services-title", {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      ease: "back.out(1.7)",
-    })
-    .from(
-      ".service-card-1",
-      {
-        x: -100,
-        opacity: 0,
-        rotation: -5,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      "-=0.5"
-    )
-    .from(
-      ".service-card-2",
-      {
-        y: 100,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      "-=0.6"
-    )
-    .from(
-      ".service-card-3",
-      {
-        x: 100,
-        opacity: 0,
-        rotation: 5,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      "-=0.6"
-    );
-
-  // Animation des images des services lors du scroll
-  $gsap.utils
-    .toArray([".service-img-1", ".service-img-2", ".service-img-3"])
-    .forEach((img, i) => {
+    // Animation des images des services avec ajustements mobile
+    $gsap.utils.toArray([".service-img-1", ".service-img-2", ".service-img-3"]).forEach((img) => {
       $gsap.to(img, {
         scrollTrigger: {
           trigger: img,
           start: "top bottom",
           end: "bottom top",
           scrub: 1,
-          markers: false,
         },
-        scale: 1.3,
+        scale: isMobile ? 1.15 : 1.3,
         ease: "none",
       });
     });
-  // Préparation de l'animation du second bouton
-  $gsap.set(".second-CTA-button", {
-    scale: 0.8,
-    opacity: 0,
-    rotationY: -15,
-    transformOrigin: "center center",
-  });
 
-  const secondButtonTimeline = $gsap.timeline({
-    scrollTrigger: {
-      trigger: ".second-CTA-button",
-      start: "top 80%", // Déclenchement quand le haut du bouton atteint 80% de la hauteur de l'écran
-      end: "bottom 20%",
-      toggleActions: "restart none none reverse",
-      markers: false, // Mettre à true pour le débogage
-    },
-  });
-
-  // Animation du second bouton (identique au premier en style)
-  secondButtonTimeline
-    .to(".second-CTA-button", {
-      opacity: 1,
-      scale: 1,
-      rotationY: 0,
-      duration: 1.2,
-      ease: "elastic.out(1.2, 0.4)",
-    })
-    // Effet de pulsation subtil
-    .to(".second-CTA-button", {
-      scale: 1.05,
-      duration: 0.8,
-      repeat: 1,
-      yoyo: true,
-      ease: "power1.inOut",
+    // Animation du second bouton CTA
+    $gsap.set(".second-CTA-button", {
+      scale: 0.8,
+      opacity: 0,
+      rotationY: -15,
+      transformOrigin: "center center",
     });
 
-  // Effet hover interactif
-  const secondCtaButton = document.querySelector(".second-CTA-button");
-  if (secondCtaButton) {
-    secondCtaButton.addEventListener("mouseenter", () => {
-      $gsap.to(".second-CTA-button", {
-        scale: 1.05,
-        duration: 0.3,
-        boxShadow: "0 6px 12px rgba(0,0,0,0.15)",
-        ease: "power1.out",
-      });
+    const secondButtonTimeline = $gsap.timeline({
+      scrollTrigger: {
+        trigger: ".second-CTA-button",
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "restart none none reverse",
+      }
     });
 
-    secondCtaButton.addEventListener("mouseleave", () => {
-      $gsap.to(".second-CTA-button", {
+    secondButtonTimeline
+      .to(".second-CTA-button", {
+        opacity: 1,
         scale: 1,
-        duration: 0.3,
-        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-        ease: "power1.in",
+        rotationY: 0,
+        duration: 1.2,
+        ease: "elastic.out(1.2, 0.4)",
+      })
+      .to(".second-CTA-button", {
+        scale: 1.05,
+        duration: 0.8,
+        repeat: 1,
+        yoyo: true,
+        ease: "power1.inOut",
+      });
+
+    // Gestion des événements tactiles et hover
+    [".CTA-button", ".second-CTA-button"].forEach(selector => {
+      const button = document.querySelector(selector);
+      if (button) {
+        const handleHoverEffect = (isHovering) => {
+          $gsap.to(selector, {
+            scale: isHovering ? 1.05 : 1,
+            duration: 0.3,
+            boxShadow: isHovering ? "0 6px 12px rgba(0,0,0,0.15)" : "0 2px 5px rgba(0,0,0,0.1)",
+            ease: isHovering ? "power1.out" : "power1.in",
+          });
+        };
+
+        if (isMobile) {
+          button.addEventListener("touchstart", () => handleHoverEffect(true));
+          button.addEventListener("touchend", () => handleHoverEffect(false));
+        } else {
+          button.addEventListener("mouseenter", () => handleHoverEffect(true));
+          button.addEventListener("mouseleave", () => handleHoverEffect(false));
+        }
+      }
+    });
+
+    // Gestion du redimensionnement de la fenêtre
+    const handleResize = () => {
+      $ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Nettoyage des événements au démontage
+    onUnmounted(() => {
+      if ($ScrollTrigger) {
+        $ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      }
+      $gsap.killTweensOf("*");
+
+      window.removeEventListener("resize", handleResize);
+
+      // Supprimer les écouteurs d'événements
+      [".CTA-button", ".second-CTA-button"].forEach(selector => {
+        const button = document.querySelector(selector);
+        if (button) {
+          button.replaceWith(button.cloneNode(true));
+        }
       });
     });
   }
-
-  // Animation de l'indicateur de défilement
-  $gsap.to(".hero-scroll-indicator", {
-    y: 10,
-    duration: 1.5,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut",
-  });
-
-  // Effet parallaxe pour la section héro
-  $gsap.ScrollTrigger.create({
-    trigger: "header",
-    start: "top top",
-    end: "bottom top",
-    scrub: true,
-    markers: false,
-    onUpdate: (self) => {
-      $gsap.to(".hero-title", {
-        y: self.progress * 100,
-        duration: 0.1,
-        ease: "none",
-      });
-      $gsap.to(".hero-subtitle", {
-        y: self.progress * 70,
-        duration: 0.1,
-        ease: "none",
-      });
-    },
-  });
-
-  // S'assurer que les boutons sont cliquables
-  document.querySelectorAll(".CTA-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      console.log("Bouton cliqué");
-      navigateToContact();
-    });
-  });
-});
-
-onUnmounted(() => {
-  // Nettoyer les ScrollTriggers lorsque le composant est démonté
-  if ($gsap && $gsap.ScrollTrigger) {
-    $gsap.ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  }
-
-  // Arrêter toutes les animations en cours
-  if ($gsap) {
-    $gsap.killTweensOf("*");
-  }
-
-  // Supprimer les écouteurs d'événements
-  document.querySelectorAll(".CTA-button").forEach((button) => {
-    button.removeEventListener("click", navigateToContact);
-  });
 });
 </script>
