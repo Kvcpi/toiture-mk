@@ -20,16 +20,17 @@
         <div
           v-for="(image, index) in images"
           :key="index"
-          class="group cursor-pointer"
+          class="group cursor-pointer image-container opacity-0"
           @click="openLightbox(index)"
         >
-          <div class="relative w-full h-40 sm:h-48 md:h-64">
+          <div class="relative w-full h-40 sm:h-48 md:h-64 overflow-hidden rounded-lg">
             <img
               :src="image"
               :alt="`Réalisation ${index + 1}`"
-              class="w-full h-full object-cover rounded-lg"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               loading="lazy"
             />
+            <div class="absolute inset-0 bg-black bg-opacity-0 transition-opacity duration-500 group-hover:bg-opacity-20"></div>
           </div>
         </div>
       </div>
@@ -88,7 +89,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue';
+import { useNuxtApp } from '#app';
 
 // Liste statique des images
 const images = [
@@ -179,11 +181,43 @@ function handleKeydown(e) {
 
 // Cycle de vie du composant
 onMounted(() => {
+  const { $gsap } = useNuxtApp();
+  
+  if (!$gsap) {
+    console.warn('GSAP non disponible');
+    return;
+  }
+
+  // Animation du titre
+  $gsap.from('h1', {
+    y: -50,
+    opacity: 0,
+    duration: 1,
+    ease: 'power2.out'
+  });
+
+  // Animation des images en cascade
+  const imageContainers = document.querySelectorAll('.image-container');
+  imageContainers.forEach((container, index) => {
+    $gsap.to(container, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      delay: index * 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: container,
+        start: 'top 90%',
+        end: 'bottom 20%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  });
+
   window.addEventListener('keydown', handleKeydown)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown)
   document.body.style.overflow = 'auto'
 })
 </script>
