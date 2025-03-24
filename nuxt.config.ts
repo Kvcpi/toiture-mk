@@ -32,13 +32,7 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: ['/']
-    },
-    publicAssets: [{
-      dir: 'public',
-      maxAge: 60 * 60 * 24 * 365 // Cache pendant 1 an
-    }],
-    minify: true,
-    compressPublicAssets: true
+    }
   },
   routeRules: {
     '/': { prerender: true },
