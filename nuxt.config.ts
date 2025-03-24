@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     '~/assets/css/main.css',
     '@fortawesome/fontawesome-free/css/all.min.css'
   ],
+  ssr: true,
   app: {
     head: {
       htmlAttrs: {
@@ -31,12 +32,8 @@ export default defineNuxtConfig({
         { rel: 'canonical', href: 'https://toiture-mk.be' }
       ]
     },
-    pageTransition: {
-      name: 'slide-fade',
-      mode: 'out-in',
-      duration: 350,
-      appear: true
-    }
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' }
   },
   postcss: {
     plugins: {
@@ -52,12 +49,16 @@ export default defineNuxtConfig({
     preset: 'vercel',
     prerender: {
       crawlLinks: true,
-      routes: ['/']
+      routes: [
+        '/',
+        '/contact',
+        '/realisations',
+        '/privacy'
+      ]
     }
   },
   routeRules: {
-    '/': { prerender: true },
-    '/realisations/**': { static: true },
+    '/**': { ssr: true }
   },
   compatibilityDate: '2025-01-15',
   build: {
@@ -65,6 +66,5 @@ export default defineNuxtConfig({
   },
   experimental: {
     payloadExtraction: false
-  },
-  ssr: true
+  }
 });
