@@ -27,9 +27,12 @@ export default defineNuxtConfig({
     '~/plugins/aos.js',
     '~/plugins/gsap.client.ts'
   ],
-  // Configuration correcte pour Vercel
   nitro: {
-    preset: 'vercel',
+    preset: 'vercel-edge',
+    prerender: {
+      crawlLinks: true,
+      routes: ['/']
+    },
     publicAssets: [{
       dir: 'public',
       maxAge: 60 * 60 * 24 * 365 // Cache pendant 1 an
@@ -38,7 +41,7 @@ export default defineNuxtConfig({
     compressPublicAssets: true
   },
   routeRules: {
-    '/': { ssr: true },
+    '/': { prerender: true },
     '/realisations/**': { static: true },
   },
   compatibilityDate: '2025-01-15',
