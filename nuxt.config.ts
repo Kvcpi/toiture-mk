@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     '~/plugins/gsap.client.ts'
   ],
   nitro: {
-    preset: 'vercel-edge',
+    preset: 'vercel',
     prerender: {
       crawlLinks: true,
       routes: ['/']
