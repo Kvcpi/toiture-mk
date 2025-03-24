@@ -149,7 +149,7 @@ import { useHead } from '#imports'
 
 // SEO Metadata
 useHead({
-  title: 'Contact | Toiture MK - Expert en toiture à Zaventem',
+  title: 'Contact | Toiture Mk - Expert en toiture à Zaventem',
   meta: [
     {
       name: 'description',

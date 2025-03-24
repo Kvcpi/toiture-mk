@@ -12,25 +12,33 @@
 
       <!-- Message d'erreur -->
       <div v-else-if="error" class="text-center py-8">
-        <p class="text-red-500">Une erreur est survenue lors du chargement des images.</p>
+        <p class="text-red-500">
+          Une erreur est survenue lors du chargement des images.
+        </p>
       </div>
 
       <!-- Grid d'images -->
-      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div
+        class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+      >
         <div
           v-for="(image, index) in images"
           :key="index"
           class="group cursor-pointer image-container opacity-0"
           @click="openLightbox(index)"
         >
-          <div class="relative w-full h-40 sm:h-48 md:h-64 overflow-hidden rounded-lg">
+          <div
+            class="relative w-full h-40 sm:h-48 md:h-64 overflow-hidden rounded-lg"
+          >
             <img
               :src="image"
               :alt="`Réalisation ${index + 1}`"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-black bg-opacity-0 transition-opacity duration-500 group-hover:bg-opacity-20"></div>
+            <div
+              class="absolute inset-0 bg-black bg-opacity-0 transition-opacity duration-500 group-hover:bg-opacity-20"
+            ></div>
           </div>
         </div>
       </div>
@@ -91,6 +99,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useNuxtApp } from '#app';
+import { useHead } from '#imports'
+
+// SEO Metadata
+useHead({
+  title: 'Réalisations | Toiture Mk - Expert en toiture à Zaventem',
+})
 
 // Liste statique des images
 const images = [
@@ -141,7 +155,7 @@ const images = [
   '/realisations/45.jpg',
   '/realisations/46.jpg'
 
-  
+
 ]
 
 // État du lightbox
@@ -182,7 +196,7 @@ function handleKeydown(e) {
 // Cycle de vie du composant
 onMounted(() => {
   const { $gsap } = useNuxtApp();
-  
+
   if (!$gsap) {
     console.warn('GSAP non disponible');
     return;
