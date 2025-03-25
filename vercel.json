@@ -2,7 +2,7 @@
   "version": 2,
   "buildCommand": "nuxt build",
   "devCommand": "nuxt dev",
-  "framework": "nuxt",
+  "framework": "nextjs",
   "builds": [
     {
       "src": "./.output/server/index.mjs",
