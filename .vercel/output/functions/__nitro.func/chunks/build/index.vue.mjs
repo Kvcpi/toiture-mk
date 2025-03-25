@@ -25,11 +25,7 @@ const _imports_2 = publicAssetsURL("/images/a-propos2.webp");
 
 const _imports_3 = publicAssetsURL("/images/renovation.webp");
 
-<<<<<<< HEAD
 const _imports_4 = publicAssetsURL("/images/renovation.webp");
-=======
-const _imports_4 = publicAssetsURL("/images/construction.webp");
->>>>>>> parent of c829bc5 (Update image construction)
 
 const _imports_5 = publicAssetsURL("/images/isolation.webp");
 
