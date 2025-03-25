@@ -25,7 +25,7 @@ const _imports_2 = publicAssetsURL("/images/a-propos2.webp");
 
 const _imports_3 = publicAssetsURL("/images/renovation.webp");
 
-const _imports_4 = publicAssetsURL("/images/construction1.webp");
+const _imports_4 = publicAssetsURL("/images/construction.webp");
 
 const _imports_5 = publicAssetsURL("/images/isolation.webp");
 
