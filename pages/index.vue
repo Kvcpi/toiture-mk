@@ -149,15 +149,14 @@
           <!-- Service 2 -->
           <div class="service-card bg-gray-900 rounded-xl p-6 transform transition-all duration-300 hover:scale-105">
             <div class="aspect-video w-full mb-4 overflow-hidden rounded-lg">
-              <img src="/images/construction1.webp" alt="Construction" class="w-full h-full object-cover" />
+              <img src="/images/isolation.webp" alt="Isolation" class="w-full h-full object-cover" />
             </div>
-            <h3 class="text-xl font-bold text-orange-500 mb-4">Construction</h3>
+            <h3 class="text-xl font-bold text-orange-500 mb-4">Isolation</h3>
             <div class="h-1 w-16 bg-orange-500 mb-4"></div>
             <p class="text-gray-300">
-              Construction de toitures sur-mesure pour maisons
-              individuelles, bâtiments collectifs et locaux professionnels.
-              Nous utilisons des matériaux certifiés et respectons les
-              normes RT2020.
+              Isolation thermique et phonique complète : combles, rampants
+              et toiture. Utilisation de matériaux écologiques. Eligible aux
+              aides de l'État MaPrimeRénov'.
             </p>
           </div>
 
